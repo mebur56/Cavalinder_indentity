@@ -79,6 +79,12 @@ namespace Caalinder.Models
         [Display(Name = "Confirmar Senha")]
         [Compare("Password", ErrorMessage = "A senha e a senha de confirmação não correspondem.")]
         public string ConfirmPassword { get; set; }
+        
+        [Required]
+        [DataType(DataType.Custom)]
+        [Display(Name = "Nome")]
+        public string name { get; set; }
+        
     }
 
     public class ResetPasswordViewModel
