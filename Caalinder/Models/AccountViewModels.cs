@@ -81,10 +81,42 @@ namespace Caalinder.Models
         public string ConfirmPassword { get; set; }
         
         [Required]
-        [DataType(DataType.Custom)]
+        [DataType(DataType.Text)]
         [Display(Name = "Nome")]
         public string name { get; set; }
-        
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name do Haras")]
+        public string Haras { get; set; }
+
+        [Required]
+        [DataType(DataType.PostalCode)]
+        [Display(Name = "CEP")]
+        public string Cep { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Pais")]
+        public string Pais { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Estado")]
+        public string Estado { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Cidade")]
+        public string Cidade { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Endereço")]
+        public string endereço { get; set; }
+
+
+
     }
 
     public class ResetPasswordViewModel
