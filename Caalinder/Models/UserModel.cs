@@ -7,6 +7,8 @@ namespace Caalinder.Models
 {
     public class UserModel
     {
+        public int Id { get; set; }
+
         public string name { get; set; }
 
         public string Haras { get; set; }
@@ -20,6 +22,8 @@ namespace Caalinder.Models
         public string Cidade { get; set; }
 
         public string endereço { get; set; }
+
+        public List<HorseModel> Horses { get; set; }
 
     }
 }
