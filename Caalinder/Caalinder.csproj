@@ -48,7 +48,19 @@
     <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SimpleInjector, Version=4.5.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.5.1\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=4.5.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.4.5.1\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=4.5.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.4.5.1\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -174,6 +186,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppService\GenericAppService.cs" />
+    <Compile Include="AppService\HorseAppService.cs" />
+    <Compile Include="AppService\Interfaces\IGenericAppService.cs" />
+    <Compile Include="AppService\Interfaces\IHorseAppService.cs" />
+    <Compile Include="AppService\Interfaces\IUsuarioAppService.cs" />
+    <Compile Include="AppService\UsuarioAppService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -184,9 +202,21 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HorseController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Data\Context\ApplicationContext.cs" />
+    <Compile Include="Data\Context\GenericRepository.cs" />
+    <Compile Include="Data\EntityConfig\HorseConfiguration.cs" />
+    <Compile Include="Data\EntityConfig\UsuarioConfiguration.cs" />
+    <Compile Include="Data\Interfaces\IGenericRepository.cs" />
+    <Compile Include="Data\Interfaces\IHorseRepository.cs" />
+    <Compile Include="Data\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Data\Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Data\Repositories\HorseRepository.cs" />
+    <Compile Include="Data\Repositories\UsuarioRepository.cs" />
+    <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IoC\BootStrapper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\HorseModel.cs" />
@@ -195,6 +225,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\GenericService.cs" />
+    <Compile Include="Service\IGenericService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

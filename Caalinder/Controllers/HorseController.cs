@@ -1,4 +1,5 @@
-﻿using Caalinder.Models;
+﻿using Caalinder.AppService.Interfaces;
+using Caalinder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,15 @@ namespace Caalinder.Controllers
 {
     public class HorseController : Controller
     {
+        List<string> errors = new List<string>();
+        private readonly IHorseAppService _horseAppService;
+
+
+        public HorseController(IHorseAppService horseAppService)
+        {
+            _horseAppService = horseAppService;
+        }
+
         // GET: Horse
         public ActionResult Index()
         {
@@ -24,20 +34,20 @@ namespace Caalinder.Controllers
         // GET: Horse/Create
         public ActionResult Create()
         {
-            return View(new HorseViewModel());
+            HorseViewModel h = new HorseViewModel();
+            return View(h);
         }
 
         // POST: Horse/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(HorseViewModel horse)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                errors = _horseAppService.Insert(horse);
+                return RedirectToAction("Home");
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }
