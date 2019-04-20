@@ -87,6 +87,23 @@ namespace Caalinder
             return manager;
         }
     }
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore)
+        : base(roleStore) { }
+
+        public static ApplicationRoleManager Create( IdentityFactoryOptions<ApplicationRoleManager> options,
+            IOwinContext context)
+        {
+            ApplicationRoleManager manager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
+                return manager;
+            
+        }
+    }
+
+
+
+
 
     // Configure o gerenciador de login do aplicativo que é usado neste aplicativo.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
