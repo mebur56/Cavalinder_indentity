@@ -27,13 +27,13 @@ namespace Caalinder.IoC
             #endregion
             //Identity
 
-            container.Register<ApplicationDbContext>(Lifestyle.Scoped);
-            container.Register<IRoleStore<IdentityRole, string>>(() => new RoleStore<IdentityRole>(), Lifestyle.Scoped);
-            container.Register<ApplicationUserManager>(Lifestyle.Scoped);
-            container.Register<ApplicationRoleManager>(Lifestyle.Scoped);
-            container.Register<ApplicationSignInManager>(Lifestyle.Scoped);
+            container.Register<ApplicationDbContext>(Lifestyle.Transient);
+            container.Register<IRoleStore<IdentityRole, string>>(() => new RoleStore<IdentityRole>(), Lifestyle.Transient);
+            container.Register<ApplicationUserManager>(Lifestyle.Transient);
+            container.Register<ApplicationRoleManager>(Lifestyle.Transient);
+            container.Register<ApplicationSignInManager>(Lifestyle.Transient);
             container.Register<IAuthenticationManager>(() => HttpContext.Current.GetOwinContext().Authentication);
-            container.Register<IUserStore<ApplicationUser>>(() => new UserStore<ApplicationUser>(new ApplicationDbContext()), Lifestyle.Scoped);
+            container.Register<IUserStore<ApplicationUser>>(() => new UserStore<ApplicationUser>(new ApplicationDbContext()), Lifestyle.Transient);
 
             #region APP
             container.Register<IUsuarioAppService, UsuarioAppService>(hybridLifestyle);
