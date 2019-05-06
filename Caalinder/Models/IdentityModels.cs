@@ -25,7 +25,7 @@ namespace Caalinder.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("sqlconnection", throwIfV1Schema: false)
         {
         }
 

@@ -11,7 +11,7 @@ namespace Caalinder.Data.Context
 {
     public class ApplicationContext : DbContext
     {
-        public ApplicationContext() : base("DefaultConnection")
+        public ApplicationContext() : base("sqlconnection")
         {
 
         }

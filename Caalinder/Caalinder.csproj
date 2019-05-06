@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HorseController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Data\Context\ApplicationContext.cs" />
+    <Compile Include="Data\Context\ContextConfig.cs" />
     <Compile Include="Data\Context\GenericRepository.cs" />
     <Compile Include="Data\EntityConfig\HorseConfiguration.cs" />
     <Compile Include="Data\EntityConfig\UsuarioConfiguration.cs" />
