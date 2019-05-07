@@ -42,6 +42,13 @@ namespace Caalinder.AppService
             throw new NotImplementedException();
         }
 
+        public UserModel GetUserByName(string name)
+        {
+            Expression<Func<UserModel, bool>> filter = (UserModel p) => p.name == name;
+            var result = _userService.Get(filter, null, "");
+            var user = result.FirstOrDefault();
+            return ((user == null) ? null : (user));
+        }
         public List<string> Insert(HorseViewModel obj)
         {
             List<string> errors = new List<string>();
@@ -50,6 +57,8 @@ namespace Caalinder.AppService
                 HorseModel horse = AutoMapper.Mapper.Map<HorseViewModel, HorseModel>(obj);
                 UserModel user = new UserModel();
                 user.name = HttpContext.Current.User.Identity.Name;
+                user = GetUserByName(user.name);
+                horse.User = user;
                 if (errors?.Count > 0)
                 {
                     return errors;
