@@ -13,11 +13,13 @@ namespace Caalinder.AppService
     public class HorseAppService : GenericAppService, IHorseAppService
     {
         private readonly IGenericService<HorseModel> _horseService;
+        private readonly IGenericService<UserModel> _userService;
 
-        public HorseAppService(IUnitOfWork uow, IGenericService<HorseModel> horseService)
+        public HorseAppService(IUnitOfWork uow, IGenericService<HorseModel> horseService, IGenericService<UserModel> userService)
             : base(uow)
         {
             _horseService = horseService;
+            _userService = userService;
         }
 
         public List<string> Delete(int id)
@@ -46,6 +48,8 @@ namespace Caalinder.AppService
             try
             {
                 HorseModel horse = AutoMapper.Mapper.Map<HorseViewModel, HorseModel>(obj);
+                UserModel user = new UserModel();
+                user.name = HttpContext.Current.User.Identity.Name;
                 if (errors?.Count > 0)
                 {
                     return errors;

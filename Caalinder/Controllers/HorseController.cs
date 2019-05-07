@@ -45,7 +45,7 @@ namespace Caalinder.Controllers
             try
             {
                 errors = _horseAppService.Insert(horse);
-                return RedirectToAction("Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception e)
             {
