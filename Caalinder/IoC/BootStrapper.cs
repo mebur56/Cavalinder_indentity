@@ -22,7 +22,6 @@ namespace Caalinder.IoC
         {
 
             #region Service
-            container.Register<IGenericService<UserModel>, GenericService<UserModel>>(hybridLifestyle);
             container.Register<IGenericService<HorseModel>, GenericService<HorseModel>>(hybridLifestyle);
             #endregion
             //Identity
@@ -36,7 +35,6 @@ namespace Caalinder.IoC
             container.Register<IUserStore<ApplicationUser>>(() => new UserStore<ApplicationUser>(new ApplicationDbContext()), Lifestyle.Transient);
 
             #region APP
-            container.Register<IUsuarioAppService, UsuarioAppService>(hybridLifestyle);
             container.Register<IHorseAppService, HorseAppService>(hybridLifestyle);
             #endregion
 
@@ -46,10 +44,8 @@ namespace Caalinder.IoC
             //#endregion
 
             #region Infra_Data
-            container.Register<IUsuarioRepository, UsuarioRepository>(hybridLifestyle);
             container.Register<IHorseRepository, HorseRepository>(hybridLifestyle);
             container.Register<IUnitOfWork, UnitOfWork>(hybridLifestyle);
-            container.Register<IGenericRepository<UserModel>, GenericRepository<UserModel>>(hybridLifestyle);
             container.Register<IGenericRepository<HorseModel>, GenericRepository<HorseModel>>(hybridLifestyle);
 
             //container.Register<IUserStore<ApplicationUser>>

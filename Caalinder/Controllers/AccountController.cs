@@ -151,9 +151,10 @@ namespace Caalinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                //UserModel userModel = new UserModel { name = model.name, Cep = model.Cep, Cidade = model.Cidade, endereço = model.endereço, Estado = model.Estado, Haras = model.Haras, Pais = model.Pais };
-                UserModel userModel = AutoMapper.Mapper.Map<RegisterViewModel, UserModel>(model);
-                var user = new ApplicationUser { UserName = model.name, Email = model.Email, userModel = userModel };
+                var user = new ApplicationUser {  UserName = model.name, Email = model.Email, Cep=model.Cep, Cidade=model.Cidade, Pais=model.Pais,
+                    endereço =model.endereço, Estado=model.Estado, Haras=model.Estado, name=model.name};
+
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

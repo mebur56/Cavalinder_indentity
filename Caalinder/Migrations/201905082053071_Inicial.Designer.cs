@@ -7,13 +7,13 @@ namespace Caalinder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CriaMdf : IMigrationMetadata
+    public sealed partial class Inicial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CriaMdf));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Inicial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201904221852038_CriaMdf"; }
+            get { return "201905082053071_Inicial"; }
         }
         
         string IMigrationMetadata.Source

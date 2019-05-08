@@ -15,13 +15,11 @@ namespace Caalinder.AppService
     public class HorseAppService : GenericAppService, IHorseAppService
     {
         private readonly IGenericService<HorseModel> _horseService;
-        private readonly IGenericService<UserModel> _userService;
 
-        public HorseAppService(IUnitOfWork uow, IGenericService<HorseModel> horseService, IGenericService<UserModel> userService)
+        public HorseAppService(IUnitOfWork uow, IGenericService<HorseModel> horseService)
             : base(uow)
         {
             _horseService = horseService;
-            _userService = userService;
         }
 
         public List<string> Delete(int id)
@@ -44,23 +42,22 @@ namespace Caalinder.AppService
             throw new NotImplementedException();
         }
 
-        public UserModel GetUserByEmail(string email)
+     /*   public UserModel GetUserById(string Id)
         {
-            Expression<Func<UserModel, bool>> filter = (UserModel p) => p.name == email;
+            Expression<Func<UserModel, bool>> filter = (Apli p) => p.Id == Id;
             var result = _userService.Get(filter, null, "");
             var user = result.FirstOrDefault();
             return ((user == null) ? null : (user));
-        }
+        }*/
         public List<string> Insert(HorseViewModel obj)
         {
             List<string> errors = new List<string>();
             try
             {
                 HorseModel horse = AutoMapper.Mapper.Map<HorseViewModel, HorseModel>(obj);
-                UserModel userModel = new UserModel();
                 ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext()
                     .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-                horse.User = GetUserByEmail(user.UserName);            
+                 horse.ApplicationUserID = user.Id;
                 if (errors?.Count > 0)
                 {
                     return errors;

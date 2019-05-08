@@ -11,8 +11,6 @@ namespace Caalinder.AppService
 {
     public class MatchAppService
     {
-        private readonly IGenericService<HorseModel> _horseService;
-        private readonly IGenericService<UserModel> _userService;
-        
+        private readonly IGenericService<HorseModel> _horseService;        
     }
 }

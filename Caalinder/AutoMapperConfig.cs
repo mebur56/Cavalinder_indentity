@@ -13,10 +13,6 @@ namespace Caalinder
             AutoMapper.Mapper.Initialize(
                 cfg =>
                 {
-                    #region  Usuario 
-                    cfg.CreateMap<UserModel, RegisterViewModel>().ReverseMap();
-
-                    #endregion
 
                     #region  Horse 
                     cfg.CreateMap<HorseModel, HorseViewModel>().ReverseMap();
