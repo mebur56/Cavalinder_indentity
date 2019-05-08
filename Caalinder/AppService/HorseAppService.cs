@@ -58,7 +58,8 @@ namespace Caalinder.AppService
             {
                 HorseModel horse = AutoMapper.Mapper.Map<HorseViewModel, HorseModel>(obj);
                 UserModel userModel = new UserModel();
-                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
                 horse.User = GetUserByEmail(user.UserName);            
                 if (errors?.Count > 0)
                 {

@@ -191,6 +191,7 @@
     <Compile Include="AppService\Interfaces\IGenericAppService.cs" />
     <Compile Include="AppService\Interfaces\IHorseAppService.cs" />
     <Compile Include="AppService\Interfaces\IUsuarioAppService.cs" />
+    <Compile Include="AppService\MatchAppService.cs" />
     <Compile Include="AppService\UsuarioAppService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HorseController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Data\Context\ApplicationContext.cs" />
     <Compile Include="Data\Context\ContextConfig.cs" />
     <Compile Include="Data\Context\GenericRepository.cs" />
@@ -297,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Match\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
