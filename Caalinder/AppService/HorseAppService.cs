@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace Caalinder.AppService
 {
@@ -42,9 +44,9 @@ namespace Caalinder.AppService
             throw new NotImplementedException();
         }
 
-        public UserModel GetUserByName(string name)
+        public UserModel GetUserByEmail(string email)
         {
-            Expression<Func<UserModel, bool>> filter = (UserModel p) => p.name == name;
+            Expression<Func<UserModel, bool>> filter = (UserModel p) => p.name == email;
             var result = _userService.Get(filter, null, "");
             var user = result.FirstOrDefault();
             return ((user == null) ? null : (user));
@@ -55,10 +57,9 @@ namespace Caalinder.AppService
             try
             {
                 HorseModel horse = AutoMapper.Mapper.Map<HorseViewModel, HorseModel>(obj);
-                UserModel user = new UserModel();
-                user.name = HttpContext.Current.User.Identity.Name;
-                user = GetUserByName(user.name);
-                horse.User = user;
+                UserModel userModel = new UserModel();
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                horse.User = GetUserByEmail(user.UserName);            
                 if (errors?.Count > 0)
                 {
                     return errors;
