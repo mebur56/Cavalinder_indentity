@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Caalinder.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Caalinder.Controllers
 {
@@ -45,16 +46,16 @@ namespace Caalinder.Controllers
             ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name");
             return View();
         }
-
-        // POST: Horse/Create
-        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Gender,HorseBrand,HorseBirth,Description,ApplicationUserID")] HorseModel horseModel)
         {
+            ApplicationUser CurrentUser = System.Web.HttpContext.Current.GetOwinContext()
+                   .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                horseModel.ApplicationUserId = CurrentUser.Id;
                 db.HorseModels.Add(horseModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
