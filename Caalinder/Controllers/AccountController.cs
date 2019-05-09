@@ -151,7 +151,7 @@ namespace Caalinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {  UserName = model.name, Email = model.Email, Cep=model.Cep, Cidade=model.Cidade, Pais=model.Pais,
+                var user = new ApplicationUser {  UserName = model.Email, Email = model.Email, Cep=model.Cep, Cidade=model.Cidade, Pais=model.Pais,
                     endereço =model.endereço, Estado=model.Estado, Haras=model.Estado, name=model.name};
 
                 
