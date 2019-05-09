@@ -1,0 +1,66 @@
+﻿@model Caalinder.Models.HorseModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HorseModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorseBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorseBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorseBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorseBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

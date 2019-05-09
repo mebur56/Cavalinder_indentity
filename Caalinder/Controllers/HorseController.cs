@@ -1,100 +1,135 @@
-﻿using Caalinder.AppService.Interfaces;
-using Caalinder.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Caalinder.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Caalinder.Controllers
 {
     public class HorseController : Controller
     {
-        List<string> errors = new List<string>();
-        private readonly IHorseAppService _horseAppService;
-
-
-        public HorseController(IHorseAppService horseAppService)
-        {
-            _horseAppService = horseAppService;
-        }
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Horse
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<HorseModel> horses = new List<HorseModel>();
+            string userid = User.Identity.GetUserId();
+            horses = db.HorseModels.Where(h => h.ApplicationUserId == userid);
+            return View(horses.ToList());
         }
 
         // GET: Horse/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HorseModel horseModel = db.HorseModels.Find(id);
+            if (horseModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(horseModel);
         }
 
         // GET: Horse/Create
         public ActionResult Create()
         {
-            HorseViewModel h = new HorseViewModel();
-            return View(h);
+            ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name");
+            return View();
         }
 
         // POST: Horse/Create
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(HorseViewModel horse)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name,Gender,HorseBrand,HorseBirth,Description,ApplicationUserID")] HorseModel horseModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                errors = _horseAppService.Insert(horse);
-                return RedirectToAction("Index", "Home");
+                db.HorseModels.Add(horseModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (Exception e)
-            {
-                return View();
-            }
+
+            ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name", horseModel.ApplicationUserId);
+            return View(horseModel);
         }
 
         // GET: Horse/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HorseModel horseModel = db.HorseModels.Find(id);
+            if (horseModel == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name", horseModel.ApplicationUserId);
+            return View(horseModel);
         }
 
         // POST: Horse/Edit/5
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Gender,HorseBrand,HorseBirth,Description,ApplicationUserID")] HorseModel horseModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(horseModel).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name", horseModel.ApplicationUserId);
+            return View(horseModel);
         }
 
         // GET: Horse/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            HorseModel horseModel = db.HorseModels.Find(id);
+            if (horseModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(horseModel);
         }
 
         // POST: Horse/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            HorseModel horseModel = db.HorseModels.Find(id);
+            db.HorseModels.Remove(horseModel);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }

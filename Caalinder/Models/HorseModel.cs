@@ -24,6 +24,6 @@ namespace Caalinder.Models
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         
-        public string ApplicationUserID { get; set; }
+        public string ApplicationUserId { get; set; }
     }
 }

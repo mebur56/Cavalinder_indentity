@@ -199,6 +199,7 @@
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Horse2Controller.cs" />
     <Compile Include="Controllers\HorseController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
@@ -215,9 +216,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\BootStrapper.cs" />
-    <Compile Include="Migrations\201905082053071_Inicial.cs" />
-    <Compile Include="Migrations\201905082053071_Inicial.Designer.cs">
-      <DependentUpon>201905082053071_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\201905091800504_inicial.cs" />
+    <Compile Include="Migrations\201905091800504_inicial.Designer.cs">
+      <DependentUpon>201905091800504_inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -290,6 +291,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Horse\Create.cshtml" />
+    <Content Include="Views\Horse\Delete.cshtml" />
+    <Content Include="Views\Horse\Details.cshtml" />
+    <Content Include="Views\Horse\Edit.cshtml" />
+    <Content Include="Views\Horse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,8 +314,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905082053071_Inicial.resx">
-      <DependentUpon>201905082053071_Inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905091800504_inicial.resx">
+      <DependentUpon>201905091800504_inicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

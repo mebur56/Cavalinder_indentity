@@ -48,5 +48,9 @@ namespace Caalinder.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Caalinder.Models.HorseModel> HorseModels { get; set; }
+
+       // public System.Data.Entity.DbSet<Caalinder.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
