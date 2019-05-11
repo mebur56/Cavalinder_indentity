@@ -190,7 +190,6 @@
     <Compile Include="AppService\HorseAppService.cs" />
     <Compile Include="AppService\Interfaces\IGenericAppService.cs" />
     <Compile Include="AppService\Interfaces\IHorseAppService.cs" />
-    <Compile Include="AppService\MatchAppService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -206,10 +205,13 @@
     <Compile Include="Data\Context\ContextConfig.cs" />
     <Compile Include="Data\Context\GenericRepository.cs" />
     <Compile Include="Data\EntityConfig\HorseConfiguration.cs" />
+    <Compile Include="Data\EntityConfig\MatchConfiguration.cs" />
     <Compile Include="Data\Interfaces\IGenericRepository.cs" />
     <Compile Include="Data\Interfaces\IHorseRepository.cs" />
+    <Compile Include="Data\Interfaces\IMatchRepository.cs" />
     <Compile Include="Data\Interfaces\IUnitOfWork.cs" />
     <Compile Include="Data\Repositories\HorseRepository.cs" />
+    <Compile Include="Data\Repositories\MatchRepository.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,13 +221,16 @@
     <Compile Include="Migrations\201905092000544_Inicial.Designer.cs">
       <DependentUpon>201905092000544_Inicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905102303087_matchModels.cs" />
+    <Compile Include="Migrations\201905102303087_matchModels.Designer.cs">
+      <DependentUpon>201905102303087_matchModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CustomUserStore.cs" />
     <Compile Include="Models\HorseModel.cs" />
     <Compile Include="Models\HorseViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LikeModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MatchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -294,10 +299,15 @@
     <Content Include="Views\Horse\Details.cshtml" />
     <Content Include="Views\Horse\Edit.cshtml" />
     <Content Include="Views\Horse\Index.cshtml" />
+    <Content Include="Views\Match\Create.cshtml" />
+    <Content Include="Views\Match\Delete.cshtml" />
+    <Content Include="Views\Match\Details.cshtml" />
+    <Content Include="Views\Match\Edit.cshtml" />
+    <Content Include="Views\Match\Index.cshtml" />
+    <Content Include="Views\Match\SelecionarCavalo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Match\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -315,6 +325,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905092000544_Inicial.resx">
       <DependentUpon>201905092000544_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905102303087_matchModels.resx">
+      <DependentUpon>201905102303087_matchModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

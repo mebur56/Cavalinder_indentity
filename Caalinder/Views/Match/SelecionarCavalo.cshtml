@@ -1,0 +1,73 @@
+﻿@model Caalinder.Models.HorseModel
+
+@{
+    ViewBag.Title = "Selecionar o seu cavalo";
+}
+
+<h2>SelecionarCavalo</h2>
+
+<div>
+    <h4>HorseModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorseBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorseBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorseBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorseBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Name", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

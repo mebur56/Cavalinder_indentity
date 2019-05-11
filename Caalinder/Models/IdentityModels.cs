@@ -27,6 +27,7 @@ namespace Caalinder.Models
         public string endereço { get; set; }
 
         public virtual ICollection<HorseModel> Horses { get; set; }
+        public virtual ICollection<MatchModel> Matches { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -50,6 +51,7 @@ namespace Caalinder.Models
         }
 
         public System.Data.Entity.DbSet<Caalinder.Models.HorseModel> HorseModels { get; set; }
+        public System.Data.Entity.DbSet<Caalinder.Models.MatchModel> MatchModels { get; set; }
 
        // public System.Data.Entity.DbSet<Caalinder.Models.ApplicationUser> ApplicationUsers { get; set; }
     }

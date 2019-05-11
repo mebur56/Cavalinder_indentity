@@ -1,0 +1,58 @@
+﻿@model Caalinder.Models.MatchModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MatchModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Horse1Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Horse1Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Horse2Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Horse2Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Like1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Like1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Like2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Like2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Match)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Match)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

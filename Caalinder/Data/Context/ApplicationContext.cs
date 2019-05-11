@@ -17,7 +17,7 @@ namespace Caalinder.Data.Context
         }
 
         public DbSet<HorseModel> Horses { get; set; }
-
+        public DbSet<MatchModel> Matches { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,6 +35,7 @@ namespace Caalinder.Data.Context
             modelBuilder.Properties<string>()
                 .Configure(p => p.HasMaxLength(100));
             modelBuilder.Configurations.Add(new HorseConfiguration());
+            modelBuilder.Configurations.Add(new MatchConfiguration());
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Caalinder.IoC
 
             #region Service
             container.Register<IGenericService<HorseModel>, GenericService<HorseModel>>(hybridLifestyle);
+            container.Register<IGenericService<MatchModel>, GenericService<MatchModel>>(hybridLifestyle);
             #endregion
             //Identity
 
@@ -47,6 +48,7 @@ namespace Caalinder.IoC
             container.Register<IHorseRepository, HorseRepository>(hybridLifestyle);
             container.Register<IUnitOfWork, UnitOfWork>(hybridLifestyle);
             container.Register<IGenericRepository<HorseModel>, GenericRepository<HorseModel>>(hybridLifestyle);
+            container.Register<IGenericRepository<MatchModel>, GenericRepository<MatchModel>>(hybridLifestyle);
 
             //container.Register<IUserStore<ApplicationUser>>
 
