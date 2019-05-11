@@ -13,6 +13,7 @@ namespace Caalinder.Controllers
 {
     public class MatchController : Controller
     {
+
         private ApplicationDbContext db = new ApplicationDbContext();
        
         // GET: Match
@@ -45,6 +46,52 @@ namespace Caalinder.Controllers
             
             return View(horseModel);
         }
+        public ActionResult Confirmar()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Confirmar(FormCollection form)
+        {
+            IEnumerable<MatchModel> matchlist = new List<MatchModel>();
+            MatchModel matchfeito = new MatchModel();
+            bool likou = false;
+            int IdMeuCavaloEscolhido = Convert.ToInt32(form["Name"].ToString());
+            int IdCavaloEscolhido = Convert.ToInt32(form["IdCavalo"].ToString());
+            matchlist = db.MatchModels.Where(m => m.Horse1Id == IdCavaloEscolhido);
+            
+            foreach(MatchModel model in matchlist)
+            {
+                if (IdMeuCavaloEscolhido == model.Horse2Id)
+                {
+                    model.Like1 = true;
+                    model.Like2 = true;
+                    matchfeito = model;
+                    likou = true;
+                }
+            }
+            if (likou) AddNewMatch(matchfeito.Like1, matchfeito.Like2, matchfeito.Horse1Id, matchfeito.Horse2Id);
+            else AddNewMatch(true, false, IdMeuCavaloEscolhido, IdCavaloEscolhido);
+                
+            return RedirectToAction("Index");
+        }
+
+
+        public void AddNewMatch(bool like1, bool like2, int horseId1, int horseId2)
+        {
+            MatchModel Match = new MatchModel();
+            Match.Like1 = like1;
+            Match.Like2 = like2;
+            Match.Horse1Id = horseId1;
+            Match.Horse2Id = horseId2;
+            if (like1 && like2) Match.Match = true;
+            else Match.Match = false;
+            db.MatchModels.Add(Match);
+            db.SaveChanges();
+        }
+
+
         public ActionResult Details(int? id)
         {
             if (id == null)
