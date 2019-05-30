@@ -217,13 +217,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\BootStrapper.cs" />
-    <Compile Include="Migrations\201905092000544_Inicial.cs" />
-    <Compile Include="Migrations\201905092000544_Inicial.Designer.cs">
-      <DependentUpon>201905092000544_Inicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905102303087_matchModels.cs" />
-    <Compile Include="Migrations\201905102303087_matchModels.Designer.cs">
-      <DependentUpon>201905102303087_matchModels.cs</DependentUpon>
+    <Compile Include="Migrations\201905301953217_Inicial.cs" />
+    <Compile Include="Migrations\201905301953217_Inicial.Designer.cs">
+      <DependentUpon>201905301953217_Inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -323,11 +319,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905092000544_Inicial.resx">
-      <DependentUpon>201905092000544_Inicial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905102303087_matchModels.resx">
-      <DependentUpon>201905102303087_matchModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905301953217_Inicial.resx">
+      <DependentUpon>201905301953217_Inicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
