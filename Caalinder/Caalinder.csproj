@@ -217,10 +217,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\BootStrapper.cs" />
-    <Compile Include="Migrations\201906081900548_inicial.cs" />
-    <Compile Include="Migrations\201906081900548_inicial.Designer.cs">
-      <DependentUpon>201906081900548_inicial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CustomUserStore.cs" />
@@ -319,11 +315,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906081900548_inicial.resx">
-      <DependentUpon>201906081900548_inicial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

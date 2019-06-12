@@ -1,20 +1,21 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using Caalinder.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Caalinder.Models;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Caalinder.Controllers
 {
+
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -151,8 +152,18 @@ namespace Caalinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {  UserName = model.Email, Email = model.Email, Cep=model.Cep, Cidade=model.Cidade, Pais=model.Pais,
-                    endereço =model.endereço, Estado=model.Estado, Haras=model.Haras, name=model.name};
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Cep = model.Cep,
+                    Cidade = model.Cidade,
+                    Pais = model.Pais,
+                    endereço = model.endereço,
+                    Estado = model.Estado,
+                    Haras = model.Haras,
+                    name = model.name
+                };
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -172,7 +183,7 @@ namespace Caalinder.Controllers
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            
+
             return View();
         }
 
@@ -426,6 +437,55 @@ namespace Caalinder.Controllers
 
             base.Dispose(disposing);
         }
+
+        // GET: Horse/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = db.Users.Find(id);
+            EditViewModel editView = new EditViewModel();
+            editView.Haras = user.Haras;
+            editView.Cep = user.Cep;
+            editView.Cidade = user.Cidade;
+            editView.Estado = user.endereço;
+            editView.endereço = user.endereço;
+            editView.Pais = user.Pais;
+            if (editView == null)
+            {
+                return HttpNotFound();
+            }
+            return View(editView);
+        }
+
+        // POST: Horse/Edit/5
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditViewModel editView)
+        {
+            ApplicationUser user = new ApplicationUser();
+            user.Haras = editView.Haras;
+            user.Cep = editView.Cep;
+            user.Cidade = editView.Cidade;
+            user.endereço = editView.endereço;
+            user.Estado = editView.Estado;
+            user.Pais = editView.Pais;
+            ApplicationUser CurrentUser = System.Web.HttpContext.Current.GetOwinContext()
+                  .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            if (ModelState.IsValid)
+            {
+                user.Id = CurrentUser.Id;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(editView);
+        }
+
 
         #region Auxiliares
         // Usado para proteção XSRF ao adicionar logons externos
