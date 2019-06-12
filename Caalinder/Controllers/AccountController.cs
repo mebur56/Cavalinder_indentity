@@ -152,10 +152,9 @@ namespace Caalinder.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser {  UserName = model.Email, Email = model.Email, Cep=model.Cep, Cidade=model.Cidade, Pais=model.Pais,
-                    endereço =model.endereço, Estado=model.Estado, Haras=model.Estado, name=model.name};
+                    endereço =model.endereço, Estado=model.Estado, Haras=model.Haras, name=model.name};
 
-                
-                var result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -168,11 +167,13 @@ namespace Caalinder.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                if (result.Succeeded) return View(model);
                 AddErrors(result);
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            return View(model);
+            
+            return View();
         }
 
         //
