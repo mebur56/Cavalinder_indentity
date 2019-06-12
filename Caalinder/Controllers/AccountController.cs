@@ -439,14 +439,11 @@ namespace Caalinder.Controllers
         }
 
         // GET: Horse/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApplicationUser user = db.Users.Find(id);
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
             EditViewModel editView = new EditViewModel();
+            editView.name = user.name;
             editView.Haras = user.Haras;
             editView.Cep = user.Cep;
             editView.Cidade = user.Cidade;
@@ -467,7 +464,8 @@ namespace Caalinder.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditViewModel editView)
         {
-            ApplicationUser user = new ApplicationUser();
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            user.name = editView.name;
             user.Haras = editView.Haras;
             user.Cep = editView.Cep;
             user.Cidade = editView.Cidade;
@@ -481,7 +479,7 @@ namespace Caalinder.Controllers
                 user.Id = CurrentUser.Id;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
             return View(editView);
         }
