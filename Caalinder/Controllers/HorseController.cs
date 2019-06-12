@@ -46,7 +46,7 @@ namespace Caalinder.Controllers
             ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name");
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Gender,HorseBrand,HorseBirth,Description,ApplicationUserID")] HorseModel horseModel)
@@ -88,8 +88,11 @@ namespace Caalinder.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Gender,HorseBrand,HorseBirth,Description,ApplicationUserID")] HorseModel horseModel)
         {
+              ApplicationUser CurrentUser = System.Web.HttpContext.Current.GetOwinContext()
+                   .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                horseModel.ApplicationUserId = CurrentUser.Id;
                 db.Entry(horseModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -18,5 +18,9 @@ namespace Caalinder.Models
         public DateTime HorseBirth { get; set; }
 
         public string Description { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public string ApplicationUserId { get; set; }
     }
 }

@@ -112,65 +112,65 @@ namespace Caalinder.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Horse1Id,Horse2Id,Like1,Like2,Match")] MatchModel matchModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.MatchModels.Add(matchModel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,Horse1Id,Horse2Id,Like1,Like2,Match")] MatchModel matchModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.MatchModels.Add(matchModel);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(matchModel);
-        }
+        //    return View(matchModel);
+        //}
 
         // GET: Match/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MatchModel matchModel = db.MatchModels.Find(id);
-            if (matchModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(matchModel);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    MatchModel matchModel = db.MatchModels.Find(id);
+        //    if (matchModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(matchModel);
+        //}
 
         // POST: Match/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Horse1Id,Horse2Id,Like1,Like2,Match")] MatchModel matchModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(matchModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(matchModel);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Horse1Id,Horse2Id,Like1,Like2,Match")] MatchModel matchModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(matchModel).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(matchModel);
+        //}
 
-        // GET: Match/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MatchModel matchModel = db.MatchModels.Find(id);
-            if (matchModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(matchModel);
-        }
+        //// GET: Match/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    MatchModel matchModel = db.MatchModels.Find(id);
+        //    if (matchModel == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(matchModel);
+        //}
 
         // POST: Match/Delete/5
         [HttpPost, ActionName("Delete")]
