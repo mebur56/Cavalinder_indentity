@@ -167,13 +167,13 @@ namespace Caalinder.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                if (result.Succeeded) return View(model);
+   
                 AddErrors(result);
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
             
-            return View();
+            return View(model);
         }
 
         //

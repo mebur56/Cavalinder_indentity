@@ -13,7 +13,7 @@ namespace Caalinder.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201906081900548_inicial"; }
+            get { return "201906121719528_inicial"; }
         }
         
         string IMigrationMetadata.Source
