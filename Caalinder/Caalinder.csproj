@@ -217,13 +217,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\BootStrapper.cs" />
-    <Compile Include="Migrations\201905092000544_Inicial.cs" />
-    <Compile Include="Migrations\201905092000544_Inicial.Designer.cs">
-      <DependentUpon>201905092000544_Inicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905102303087_matchModels.cs" />
-    <Compile Include="Migrations\201905102303087_matchModels.Designer.cs">
-      <DependentUpon>201905102303087_matchModels.cs</DependentUpon>
+    <Compile Include="Migrations\201906081900548_inicial.cs" />
+    <Compile Include="Migrations\201906081900548_inicial.Designer.cs">
+      <DependentUpon>201906081900548_inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -233,6 +229,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MatchModel.cs" />
+    <Compile Include="Models\MeusMatchesVIewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\GenericService.cs" />
     <Compile Include="Service\IGenericService.cs" />
@@ -305,6 +302,7 @@
     <Content Include="Views\Match\Edit.cshtml" />
     <Content Include="Views\Match\Index.cshtml" />
     <Content Include="Views\Match\SelecionarCavalo.cshtml" />
+    <Content Include="Views\Match\MeusMatches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -323,11 +321,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905092000544_Inicial.resx">
-      <DependentUpon>201905092000544_Inicial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905102303087_matchModels.resx">
-      <DependentUpon>201905102303087_matchModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906081900548_inicial.resx">
+      <DependentUpon>201906081900548_inicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,55 @@
+﻿@model Caalinder.Models.MeusMatchesVIewModel
+    }
+@{
+    ViewBag.Title = "MeusMatches";
+}
+
+<h2>Meus Matches</h2>
+
+<p>
+</p>
+<table class="table">
+    <tr>
+       
+    </tr>
+
+    @foreach (var cavalo in Model.MeusCavalos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.HorseBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.HorseBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.Description)
+            </td>
+
+
+        </tr>
+    }
+    @foreach (var cavalo in Model.CavalosDeles)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.HorseBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.HorseBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cavalo.Description)
+            </td>
+
+
+        </tr>
+    }
+
+</table>

@@ -15,5 +15,7 @@ namespace Caalinder.Models
         public bool Like1 { get; set; }
         public bool Like2 { get; set; }
         public bool Match { get; set; }
+        public string ApplicationUser1 { get; set; }
+        public string ApplicationUser2 { get; set; }
     }
 }

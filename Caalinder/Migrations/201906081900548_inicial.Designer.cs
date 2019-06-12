@@ -7,13 +7,13 @@ namespace Caalinder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class matchModels : IMigrationMetadata
+    public sealed partial class inicial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(matchModels));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inicial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905102303087_matchModels"; }
+            get { return "201906081900548_inicial"; }
         }
         
         string IMigrationMetadata.Source

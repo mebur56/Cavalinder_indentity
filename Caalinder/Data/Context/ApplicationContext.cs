@@ -21,7 +21,7 @@ namespace Caalinder.Data.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+           /* modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
@@ -36,6 +36,7 @@ namespace Caalinder.Data.Context
                 .Configure(p => p.HasMaxLength(100));
             modelBuilder.Configurations.Add(new HorseConfiguration());
             modelBuilder.Configurations.Add(new MatchConfiguration());
+            */
         }
     }
 }

@@ -3,7 +3,7 @@ namespace Caalinder.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Inicial : DbMigration
+    public partial class inicial : DbMigration
     {
         public override void Up()
         {
@@ -76,6 +76,24 @@ namespace Caalinder.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.MatchModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Horse1Id = c.Int(nullable: false),
+                        Horse2Id = c.Int(nullable: false),
+                        Like1 = c.Boolean(nullable: false),
+                        Like2 = c.Boolean(nullable: false),
+                        Match = c.Boolean(nullable: false),
+                        ApplicationUser1 = c.String(),
+                        ApplicationUser2 = c.String(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
                     {
@@ -104,18 +122,21 @@ namespace Caalinder.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.MatchModels", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.HorseModels", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.MatchModels", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.HorseModels", new[] { "ApplicationUserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.MatchModels");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");

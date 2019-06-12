@@ -8,14 +8,16 @@ using System.Web;
 using System.Web.Mvc;
 using Caalinder.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Caalinder.Controllers
 {
     public class MatchController : Controller
     {
 
+
         private ApplicationDbContext db = new ApplicationDbContext();
-       
+
         // GET: Match
         public ActionResult Index()
         {
@@ -25,8 +27,8 @@ namespace Caalinder.Controllers
             horses = db.HorseModels.Where(h => h.ApplicationUserId != userid);
             return View(horses.ToList());
         }
-        
-      
+
+
         // GET: Match/Details/5
         public ActionResult SelecionarCavalo(int? id)
         {
@@ -42,8 +44,8 @@ namespace Caalinder.Controllers
             IEnumerable<HorseModel> horses = new List<HorseModel>();
             string userid = User.Identity.GetUserId();
             horses = db.HorseModels.Where(h => h.ApplicationUserId == userid);
-            ViewBag.Name = new SelectList(horses,"Id","Name", horseModel.Name);
-            
+            ViewBag.Name = new SelectList(horses, "Id", "Name", horseModel.Name);
+
             return View(horseModel);
         }
         public ActionResult Confirmar()
@@ -60,35 +62,50 @@ namespace Caalinder.Controllers
             int IdMeuCavaloEscolhido = Convert.ToInt32(form["Name"].ToString());
             int IdCavaloEscolhido = Convert.ToInt32(form["IdCavalo"].ToString());
             matchlist = db.MatchModels.Where(m => m.Horse1Id == IdCavaloEscolhido);
-            
-            foreach(MatchModel model in matchlist)
+
+            foreach (MatchModel model in matchlist)
             {
                 if (IdMeuCavaloEscolhido == model.Horse2Id)
                 {
                     model.Like1 = true;
                     model.Like2 = true;
+                    model.Match = true;
+                    model.ApplicationUser2 = User.Identity.GetUserId();
                     matchfeito = model;
                     likou = true;
                 }
             }
-            if (likou) AddNewMatch(matchfeito.Like1, matchfeito.Like2, matchfeito.Horse1Id, matchfeito.Horse2Id);
-            else AddNewMatch(true, false, IdMeuCavaloEscolhido, IdCavaloEscolhido);
-                
+            if (likou) updateMatch(matchfeito);
+            else AddNewMatch(true, false, User.Identity.GetUserId() , IdMeuCavaloEscolhido, IdCavaloEscolhido);
+
             return RedirectToAction("Index");
         }
+        public void updateMatch(MatchModel match)
+        {
+            db.Entry(match).State = EntityState.Modified;
+            db.SaveChanges();
+        }
 
-
-        public void AddNewMatch(bool like1, bool like2, int horseId1, int horseId2)
+        public void AddNewMatch(bool like1 , bool like2, string CurrentUserID, int horseId1, int horseId2)
         {
             MatchModel Match = new MatchModel();
             Match.Like1 = like1;
             Match.Like2 = like2;
+            Match.ApplicationUser1 = CurrentUserID;
             Match.Horse1Id = horseId1;
             Match.Horse2Id = horseId2;
-            if (like1 && like2) Match.Match = true;
-            else Match.Match = false;
-            db.MatchModels.Add(Match);
-            db.SaveChanges();
+            IEnumerable<MatchModel> matchexist = db.MatchModels.Where(m => (m.Like1 == Match.Like1 &&
+            m.Like2 == Match.Like2 && m.Horse1Id == Match.Horse1Id && m.Horse2Id == Match.Horse2Id));
+
+            if (!matchexist.Any())
+            {
+                db.MatchModels.Add(Match);
+                db.SaveChanges();
+            }
+            else
+            {
+                //exibir mensagem ao usuario dizendo que o mesmo ja deu like entre esses cavalos
+            }
         }
 
 
@@ -191,5 +208,38 @@ namespace Caalinder.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult MeusMatches()
+        {
+            //isso ja ta funcionando passando uma modelview para a view onde tem duas listas uma com os cavalos do usuario e o cavalo
+            //com o qual ele deu match sendo respectivos o meu cavalo 1 deu match com o cavalo 1 da outra lista e assim vai
+            // não sei mexer em html para aparecer numa tabela bonita mas essa parte ta pronta
+            string userID = User.Identity.GetUserId();
+            MeusMatchesVIewModel MatchView = new MeusMatchesVIewModel();
+            IEnumerable<MatchModel> Matches = db.MatchModels.Where(m => m.ApplicationUser1 == userID 
+            || m.ApplicationUser2 == userID);
+            List<int> MyhorseID = new List<int>();
+            List<int> TheirhorseID = new List<int>();
+            foreach (MatchModel mates in Matches)
+            {
+                if (mates.ApplicationUser1 == userID)
+                {
+                    MyhorseID.Add(mates.Horse1Id);
+                }
+                else TheirhorseID.Add(mates.Horse1Id);
+                        
+                if (mates.ApplicationUser2 == userID)
+                {
+                    MyhorseID.Add(mates.Horse2Id);
+                }
+                else TheirhorseID.Add(mates.Horse2Id);
+            }
+            List<HorseModel> Meuscavalos = db.HorseModels.Where(m =>  MyhorseID.Contains(m.Id)).ToList();
+            List<HorseModel> CavalosDele = db.HorseModels.Where(m => TheirhorseID.Contains(m.Id)).ToList();
+            MatchView.MeusCavalos = Meuscavalos;
+            MatchView.CavalosDeles = CavalosDele;
+            return View(MatchView);
+        }
+
     }
 }
