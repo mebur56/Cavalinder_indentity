@@ -7,7 +7,17 @@ namespace Caalinder.Models
 {
     public class MeusMatchesVIewModel
     {
-        public List<HorseModel> MeusCavalos { get; set; }
-        public List<HorseModel> CavalosDeles { get; set; } 
+        public int MatchId { get; set; }
+        public HorseModel MeusCavalos { get; set; }
+        public HorseModel CavalosDeles { get; set; }
+
+    }
+    public class MeusMatchesVIewIndex
+    {
+        public MeusMatchesVIewIndex()
+        {
+            MeusMatchesList = new List<MeusMatchesVIewModel>();
+        }
+        public List<MeusMatchesVIewModel> MeusMatchesList { get; set; }
     }
 }

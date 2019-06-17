@@ -1,55 +1,96 @@
-﻿@model Caalinder.Models.MeusMatchesVIewModel
-    }
+﻿@model  Caalinder.Models.MeusMatchesVIewIndex
+
 @{
     ViewBag.Title = "MeusMatches";
 }
 
 <h2>Meus Matches</h2>
-
-<p>
-</p>
-<table class="table">
-    <tr>
-       
-    </tr>
-
-    @foreach (var cavalo in Model.MeusCavalos)
-    {
+<div class="col-lg-6 col-md-6">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.HorseBrand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.HorseBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.Description)
-            </td>
-
-
+            <th>
+                Meu Cavalo
+            </th>
+            <th>
+                Raça
+            </th>
+            <th>
+                Data de Nascimento
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th></th>
         </tr>
-    }
-    @foreach (var cavalo in Model.CavalosDeles)
-    {
+
+
+        @foreach (var cavalo in Model.MeusMatchesList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.HorseBrand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.HorseBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Description)
+                </td>
+
+
+            </tr>
+        }
+    </table>
+</div>
+<div class="col-lg-6 col-md-6">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.HorseBrand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.HorseBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cavalo.Description)
-            </td>
+            <th>
+                Dono
+            </th>
 
-
+            <th>
+                Cavalo Matchado
+            </th>
+            <th>
+                Raça
+            </th>
+            <th>
+                Data de Nascimento
+            </th>
+            <th>
+                Descrição
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var cavalo in Model.MeusMatchesList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.ApplicationUser.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBrand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Match", "Deslike", new { Matchid = cavalo.MatchId })
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>
+
+

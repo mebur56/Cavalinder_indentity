@@ -76,7 +76,7 @@ namespace Caalinder.Controllers
                 }
             }
             if (likou) updateMatch(matchfeito);
-            else AddNewMatch(true, false, User.Identity.GetUserId() , IdMeuCavaloEscolhido, IdCavaloEscolhido);
+            else AddNewMatch(true, false, User.Identity.GetUserId(), IdMeuCavaloEscolhido, IdCavaloEscolhido);
 
             return RedirectToAction("Index");
         }
@@ -86,7 +86,7 @@ namespace Caalinder.Controllers
             db.SaveChanges();
         }
 
-        public void AddNewMatch(bool like1 , bool like2, string CurrentUserID, int horseId1, int horseId2)
+        public void AddNewMatch(bool like1, bool like2, string CurrentUserID, int horseId1, int horseId2)
         {
             MatchModel Match = new MatchModel();
             Match.Like1 = like1;
@@ -215,30 +215,45 @@ namespace Caalinder.Controllers
             //com o qual ele deu match sendo respectivos o meu cavalo 1 deu match com o cavalo 1 da outra lista e assim vai
             // não sei mexer em html para aparecer numa tabela bonita mas essa parte ta pronta
             string userID = User.Identity.GetUserId();
-            MeusMatchesVIewModel MatchView = new MeusMatchesVIewModel();
-            IEnumerable<MatchModel> Matches = db.MatchModels.Where(m => m.ApplicationUser1 == userID 
+            IEnumerable<MatchModel> Matches = db.MatchModels.Where(m => m.ApplicationUser1 == userID
             || m.ApplicationUser2 == userID);
+            List<int> MatchIds = new List<int>();
             List<int> MyhorseID = new List<int>();
             List<int> TheirhorseID = new List<int>();
             foreach (MatchModel mates in Matches)
             {
+                MatchIds.Add(mates.Id);
                 if (mates.ApplicationUser1 == userID)
                 {
                     MyhorseID.Add(mates.Horse1Id);
                 }
                 else TheirhorseID.Add(mates.Horse1Id);
-                        
+
                 if (mates.ApplicationUser2 == userID)
                 {
                     MyhorseID.Add(mates.Horse2Id);
                 }
                 else TheirhorseID.Add(mates.Horse2Id);
             }
-            List<HorseModel> Meuscavalos = db.HorseModels.Where(m =>  MyhorseID.Contains(m.Id)).ToList();
+            List<HorseModel> Meuscavalos = db.HorseModels.Where(m => MyhorseID.Contains(m.Id)).ToList();
             List<HorseModel> CavalosDele = db.HorseModels.Where(m => TheirhorseID.Contains(m.Id)).ToList();
-            MatchView.MeusCavalos = Meuscavalos;
-            MatchView.CavalosDeles = CavalosDele;
-            return View(MatchView);
+            int i = 0;
+            MeusMatchesVIewModel matchmodel = new MeusMatchesVIewModel();
+            MeusMatchesVIewIndex IndexMatch = new MeusMatchesVIewIndex();
+            while (i < MatchIds.Count())
+            {
+                matchmodel.MatchId = MatchIds[i];
+                matchmodel.MeusCavalos = Meuscavalos[i];
+                matchmodel.CavalosDeles = CavalosDele[i];
+                IndexMatch.MeusMatchesList.Add(matchmodel);
+                i++;
+            }
+            return View(IndexMatch);
+        }
+        public ActionResult Deslike()
+        {
+
+            return View();
         }
 
     }
