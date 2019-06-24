@@ -1,0 +1,254 @@
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+ul{
+    padding: 0pxlinportant;
+}
+.menu-principal{
+    width: 100%;
+    background-color: black;
+    height: 60px;
+    border-top: 3px solid red;
+
+ }
+ main, .content {
+     margin: 0 auto;
+     width: 980px;
+     position: relative;
+ }
+
+ .logo{
+     float: left;
+     padding: 11px;
+    width:  60%;
+ }
+
+.log-cad ul li {
+    margin-left: 10px;
+    display: inline-block;
+    float: left;
+    list-style: none;
+}
+
+.log-cad {
+    width: 20%;
+    float: right;
+}
+
+.btn1{
+    border: 1px solid red;
+}
+.header-2{
+    width: 980px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.menu-urls{
+    background-color: black;
+    height: 50px;
+    border-top: 3px solid red ;
+    border-block-end: 3px solid red;
+}
+
+.menu ul li {
+    display: inline-block;
+    color: white;
+    margin-left: 15px;
+}
+.menu ul li a:hover{
+    color: red;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.menu{
+    margin-top:-17px;
+    width: 70%;
+    float: left;
+}
+
+.busca{
+    margin-top:-17px;
+    width: 30%;
+    float: right;
+text-align: center;
+}
+.busca input{
+    background-image: url('../img/Search.png');
+    background-repeat: no-repeat;
+    background-position: 96%;
+    height:36px;
+    margin-top: 8px;
+    padding: 12px;
+    width: 190px;
+    border: 1px solid red;
+}
+
+.col-100{
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+button.slick-prev{
+    font-size:0px;
+    border:none;
+    width: 25px;
+    height: 51px;
+    background-color: transparent;
+    background-image: url('../img/arrow1.png');
+    position: absolute;
+    z-index: 9;
+    top:38%;
+    left:14%;
+}
+
+button.slick-next{
+    font-size:0px;
+    border:none;
+    width: 25px;
+    height: 51px;
+    background-color: transparent;
+    background-image: url('../img/arrow2.png');
+    position: absolute;
+    z-index: 9;
+    top:38%;
+    right:14%;
+}
+
+.slick-list{
+    width: 100%!important;
+}
+
+.slick-initialized{
+    overflow: hidden;
+}
+
+.slick-dots li button {
+    font-size: 0px;
+    border: 5px solid black;
+    width: 26px;
+    height: 26px;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slick-dots{
+    margin: 0 auto;
+    width: 50%;
+    position: absolute;
+    left: 42%;
+    top: 639px;
+}
+
+li.slick-active button {
+    background: red;
+}
+
+.slick-dots li{
+    padding-left: 10px;
+    display: inline-block;
+}
+
+.texto-destaque {
+    text-align: center;
+}
+
+.texto-destaque h1{
+    text-transform: uppercase;
+    font-size: 30px;
+    color:black;
+}
+.texto-destaque p{
+    font-size: 15px;
+    color: black;
+}
+
+.col-2{
+    margin: top auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width:45%;
+    float: left;
+    position: relative;
+}
+
+.dados{
+    margin-top: 1em;
+    text-align: center;
+    position: relative;
+}
+
+.fim {
+    background-color: black;
+    color: #c1c1c1;
+    height: 60px;
+    border-top: 3px solid red;
+    border-block-end: 3px solid red;
+}
+
+.fim p{
+    padding: 10px;
+}
+
+.text-fim{
+    margin: 0 auto;
+}
+
+/*CSS TELA DE LOGIN*/
+
+.container{
+    overflow: auto;
+    background-color:white;
+    margin: auto;
+    width: 1200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+} 
+.container img{
+    margin-left: 107px;
+    margin-right: 107px;
+    width: 6em
+}
+
+.btn{
+    margin-left: 113px;
+    margin-right: 108px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid red;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.btn-black{
+    background-color: black;
+    color: white;
+}
+
+.btn-black:hover{
+    color: red;
+}
+.campo{
+    width: 300px;
+    height: 30px;
+    border: 1px solid red;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/*CSS DA TELA DE CADASTRO*/
