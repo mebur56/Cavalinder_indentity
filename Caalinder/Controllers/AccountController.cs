@@ -1,27 +1,23 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using Caalinder.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Caalinder.Models;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Caalinder.Controllers
 {
+
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        //public AccountController()
-        //{
-        //}
-
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
@@ -151,11 +147,20 @@ namespace Caalinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {  UserName = model.Email, Email = model.Email, Cep=model.Cep, Cidade=model.Cidade, Pais=model.Pais,
-                    endereço =model.endereço, Estado=model.Estado, Haras=model.Estado, name=model.name};
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Cep = model.Cep,
+                    Cidade = model.Cidade,
+                    Pais = model.Pais,
+                    endereço = model.endereço,
+                    Estado = model.Estado,
+                    Haras = model.Haras,
+                    name = model.name
+                };
 
-                
-                var result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -168,11 +173,13 @@ namespace Caalinder.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+   
                 AddErrors(result);
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            return View(model);
+            
+            return View();
         }
 
         //
@@ -425,6 +432,53 @@ namespace Caalinder.Controllers
 
             base.Dispose(disposing);
         }
+
+        // GET: Horse/Edit/5
+        public ActionResult Edit()
+        {
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            EditViewModel editView = new EditViewModel();
+            editView.name = user.name;
+            editView.Haras = user.Haras;
+            editView.Cep = user.Cep;
+            editView.Cidade = user.Cidade;
+            editView.Estado = user.endereço;
+            editView.endereço = user.endereço;
+            editView.Pais = user.Pais;
+            if (editView == null)
+            {
+                return HttpNotFound();
+            }
+            return View(editView);
+        }
+
+        // POST: Horse/Edit/5
+        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
+        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditViewModel editView)
+        {
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            user.name = editView.name;
+            user.Haras = editView.Haras;
+            user.Cep = editView.Cep;
+            user.Cidade = editView.Cidade;
+            user.endereço = editView.endereço;
+            user.Estado = editView.Estado;
+            user.Pais = editView.Pais;
+            ApplicationUser CurrentUser = System.Web.HttpContext.Current.GetOwinContext()
+                  .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            if (ModelState.IsValid)
+            {
+                user.Id = CurrentUser.Id;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Home");
+            }
+            return View(editView);
+        }
+
 
         #region Auxiliares
         // Usado para proteção XSRF ao adicionar logons externos

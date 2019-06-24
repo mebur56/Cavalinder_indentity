@@ -217,9 +217,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\BootStrapper.cs" />
-    <Compile Include="Migrations\201905301953217_Inicial.cs" />
-    <Compile Include="Migrations\201905301953217_Inicial.Designer.cs">
-      <DependentUpon>201905301953217_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\201906121824340_base.cs" />
+    <Compile Include="Migrations\201906121824340_base.Designer.cs">
+      <DependentUpon>201906121824340_base.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -229,6 +229,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MatchModel.cs" />
+    <Compile Include="Models\MeusMatchesVIewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\GenericService.cs" />
     <Compile Include="Service\IGenericService.cs" />
@@ -239,45 +240,26 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\main.css" />
-    <Content Include="Content\slick.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Img\arrow1.png" />
-    <Content Include="Img\arrow2.png" />
-    <Content Include="Img\cadastro.png" />
-    <Content Include="Img\Entrar.png" />
-    <Content Include="Img\facebook-logo.png" />
-    <Content Include="Img\google-logo.png" />
-    <Content Include="Img\LogoCima.png" />
-    <Content Include="Img\LogoLado.png" />
-    <Content Include="Img\Search.png" />
-    <Content Include="Img\Sem Título-1.png" />
-    <Content Include="Img\slider-cavalinder1.png" />
-    <Content Include="Img\slider-cavalinder2.png" />
-    <Content Include="Img\slider-cavalinder3.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Img\photothumb.db" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-magrate.js" />
-    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\slick.min.js" />
-    <Content Include="StyleSheet1.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -322,6 +304,8 @@
     <Content Include="Views\Match\Edit.cshtml" />
     <Content Include="Views\Match\Index.cshtml" />
     <Content Include="Views\Match\SelecionarCavalo.cshtml" />
+    <Content Include="Views\Match\MeusMatches.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -340,8 +324,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905301953217_Inicial.resx">
-      <DependentUpon>201905301953217_Inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906121824340_base.resx">
+      <DependentUpon>201906121824340_base.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

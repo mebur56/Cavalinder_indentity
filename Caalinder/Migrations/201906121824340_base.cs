@@ -3,7 +3,7 @@ namespace Caalinder.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Inicial : DbMigration
+    public partial class _base : DbMigration
     {
         public override void Up()
         {
@@ -85,6 +85,8 @@ namespace Caalinder.Migrations
                         Like1 = c.Boolean(nullable: false),
                         Like2 = c.Boolean(nullable: false),
                         Match = c.Boolean(nullable: false),
+                        ApplicationUser1 = c.String(),
+                        ApplicationUser2 = c.String(),
                         ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)

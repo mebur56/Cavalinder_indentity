@@ -1,4 +1,4 @@
-﻿@model Caalinder.Models.HorseModel
+﻿@model Caalinder.Models.HorseViewModel
 
 @{
     ViewBag.Title = "SelecionarCavalo";
@@ -12,10 +12,12 @@
 
     <h4>HorseModel</h4>
     <hr />
-    @{ 
+    @{
         var IdCavalo = Model.Id;
     }
-    <input type="hidden" , value=@IdCavalo , name="IdCavalo" />
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <input type="hidden" , value=@IdCavalo name="IdCavalo" />
     <dl class="dl-horizontal">
 
         <dt>
@@ -77,16 +79,15 @@
             @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
         </div>
     </div>
-    <form action="/MatchController/Confirmar" method="post">
-       <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Confirmar" class="btn btn-default" />
-        </div>
-    </form>
-
+    <div class="form-group">
+        <form action="/MatchController/Confirmar" method="post">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Confirmar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
 }
 <p>
-
-    @Html.ActionLink("Confirmar", "Confirmar", "MatchController")
     @Html.ActionLink("Back to List", "Index")
 </p>
 @section Scripts {

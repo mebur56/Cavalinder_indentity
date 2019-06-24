@@ -46,11 +46,12 @@ namespace Caalinder.Controllers
             ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name");
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Gender,HorseBrand,HorseBirth,Description,ApplicationUserID")] HorseModel horseModel)
+        public ActionResult Create(HorseViewModel horseViewModel)
         {
+            HorseModel horseModel = AutoMapper.Mapper.Map<HorseViewModel, HorseModel>(horseViewModel);
             ApplicationUser CurrentUser = System.Web.HttpContext.Current.GetOwinContext()
                    .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (ModelState.IsValid)
@@ -78,7 +79,8 @@ namespace Caalinder.Controllers
                 return HttpNotFound();
             }
             ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name", horseModel.ApplicationUserId);
-            return View(horseModel);
+            HorseViewModel horseViewModel = AutoMapper.Mapper.Map<HorseModel, HorseViewModel>(horseModel);
+            return View(horseViewModel);
         }
 
         // POST: Horse/Edit/5
@@ -86,16 +88,20 @@ namespace Caalinder.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Gender,HorseBrand,HorseBirth,Description,ApplicationUserID")] HorseModel horseModel)
+        public ActionResult Edit(HorseViewModel horseViewModel)
         {
+            HorseModel horseModel = AutoMapper.Mapper.Map<HorseViewModel, HorseModel>(horseViewModel);
+            ApplicationUser CurrentUser = System.Web.HttpContext.Current.GetOwinContext()
+                 .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                horseModel.ApplicationUserId = CurrentUser.Id;
                 db.Entry(horseModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.ApplicationUserID = new SelectList(db.Users, "Id", "name", horseModel.ApplicationUserId);
-            return View(horseModel);
+            return View(horseViewModel);
         }
 
         // GET: Horse/Delete/5

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -53,6 +54,7 @@ namespace Caalinder.Models
         public System.Data.Entity.DbSet<Caalinder.Models.HorseModel> HorseModels { get; set; }
         public System.Data.Entity.DbSet<Caalinder.Models.MatchModel> MatchModels { get; set; }
 
-       // public System.Data.Entity.DbSet<Caalinder.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        // public System.Data.Entity.DbSet<Caalinder.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
