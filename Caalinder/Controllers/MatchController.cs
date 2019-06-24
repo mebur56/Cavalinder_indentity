@@ -17,7 +17,7 @@ namespace Caalinder.Controllers
 
 
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        public List<string> errors = new List<string>();
         // GET: Match
         public ActionResult Index()
         {
@@ -45,8 +45,8 @@ namespace Caalinder.Controllers
             string userid = User.Identity.GetUserId();
             horses = db.HorseModels.Where(h => h.ApplicationUserId == userid);
             ViewBag.Name = new SelectList(horses, "Id", "Name", horseModel.Name);
-
-            return View(horseModel);
+            HorseViewModel horseViewModel = AutoMapper.Mapper.Map<HorseModel, HorseViewModel>(horseModel);
+            return View(horseViewModel);
         }
         public ActionResult Confirmar()
         {
@@ -62,7 +62,6 @@ namespace Caalinder.Controllers
             int IdMeuCavaloEscolhido = Convert.ToInt32(form["Name"].ToString());
             int IdCavaloEscolhido = Convert.ToInt32(form["IdCavalo"].ToString());
             matchlist = db.MatchModels.Where(m => m.Horse1Id == IdCavaloEscolhido);
-
             foreach (MatchModel model in matchlist)
             {
                 if (IdMeuCavaloEscolhido == model.Horse2Id)
@@ -75,10 +74,22 @@ namespace Caalinder.Controllers
                     likou = true;
                 }
             }
-            if (likou) updateMatch(matchfeito);
-            else AddNewMatch(true, false, User.Identity.GetUserId(), IdMeuCavaloEscolhido, IdCavaloEscolhido);
+            HorseModel Myhorse = db.HorseModels.Find(IdMeuCavaloEscolhido);
+            HorseModel Otherhorse = db.HorseModels.Find(IdCavaloEscolhido);
+            if (Myhorse.Gender != Otherhorse.Gender)
+            {
+                if (likou) updateMatch(matchfeito);
+                else AddNewMatch(true, false, User.Identity.GetUserId(), IdMeuCavaloEscolhido, IdCavaloEscolhido);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                errors.Add("Cavalo de mesmo sexo selecionado");
+                AddModelStateError(errors);
+                return RedirectToAction("SelecionarCavalo/"+ Otherhorse.Id);
+            }
 
-            return RedirectToAction("Index");
+
         }
         public void updateMatch(MatchModel match)
         {
@@ -254,6 +265,13 @@ namespace Caalinder.Controllers
         {
 
             return View();
+        }
+        private void AddModelStateError(List<string> errors)
+        {
+            foreach (string error in errors)
+            {
+                ModelState.AddModelError(string.Empty, error);
+            }
         }
 
     }
