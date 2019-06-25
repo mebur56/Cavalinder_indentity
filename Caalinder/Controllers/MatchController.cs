@@ -13,10 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Caalinder.Controllers
 {
+    
     public class MatchController : Controller
     {
-
-
+        MementoDeslike mementoLike = new MementoDeslike(null);
+        public bool memento = false;
         private ApplicationDbContext db = new ApplicationDbContext();
         public List<string> errors = new List<string>();
         // GET: Match
@@ -226,6 +227,7 @@ namespace Caalinder.Controllers
             //isso ja ta funcionando passando uma modelview para a view onde tem duas listas uma com os cavalos do usuario e o cavalo
             //com o qual ele deu match sendo respectivos o meu cavalo 1 deu match com o cavalo 1 da outra lista e assim vai
             // não sei mexer em html para aparecer numa tabela bonita mas essa parte ta pronta
+            
             string userID = User.Identity.GetUserId();
             IEnumerable<MatchModel> Matches = db.MatchModels.Where(m => m.ApplicationUser1 == userID
             || m.ApplicationUser2 == userID);
@@ -287,10 +289,10 @@ namespace Caalinder.Controllers
         }
         public ActionResult Deslike(int? id)
         {
-
+            memento = true;
             MatchModel match = new MatchModel();
             match = db.MatchModels.Where(m => m.Id == id).Single();
-            MementoDeslike memento = new MementoDeslike(match);
+            mementoLike = new MementoDeslike(match);
             if (match.ApplicationUser1 == User.Identity.GetUserId())
             {
                 match.Like1 = false;
@@ -310,7 +312,17 @@ namespace Caalinder.Controllers
             return RedirectToAction("MeusMatches");
         }
 
-    //    public ActionResult Relike()
+        public ActionResult Relike(int? id)
+        {
+            MatchModel match = mementoLike.getState();
+            if(ModelState.IsValid)
+            {
+                db.Entry(match).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MeusMatches");
+            }
+            return View();
+        }
         private void AddModelStateError(List<string> errors)
         {
             foreach (string error in errors)
