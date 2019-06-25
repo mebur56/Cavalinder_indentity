@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Caalinder.Data;
 using Caalinder.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -86,7 +87,7 @@ namespace Caalinder.Controllers
             {
                 errors.Add("Cavalo de mesmo sexo selecionado");
                 AddModelStateError(errors);
-                return RedirectToAction("SelecionarCavalo/"+ Otherhorse.Id);
+                return RedirectToAction("SelecionarCavalo/" + Otherhorse.Id);
             }
 
 
@@ -233,46 +234,71 @@ namespace Caalinder.Controllers
             List<int> TheirhorseID = new List<int>();
             foreach (MatchModel mates in Matches)
             {
-                MatchIds.Add(mates.Id);
-                if (mates.ApplicationUser1 == userID)
-                {
-                    MyhorseID.Add(mates.Horse1Id);
-                }
-                else TheirhorseID.Add(mates.Horse1Id);
 
-                if (mates.ApplicationUser2 == userID)
+                if (mates.Like1 && mates.Like2 && mates.Match)
                 {
-                    MyhorseID.Add(mates.Horse2Id);
+                    MatchIds.Add(mates.Id);
+                    if (mates.ApplicationUser1 == userID)
+                    {
+                        MyhorseID.Add(mates.Horse1Id);
+                    }
+                    else TheirhorseID.Add(mates.Horse1Id);
+
+                    if (mates.ApplicationUser2 == userID)
+                    {
+                        MyhorseID.Add(mates.Horse2Id);
+                    }
+                    else TheirhorseID.Add(mates.Horse2Id);
                 }
-                else TheirhorseID.Add(mates.Horse2Id);
             }
-            List<HorseModel> Meuscavalos = db.HorseModels.Where(m => MyhorseID.Contains(m.Id)).ToList();
-            List<HorseModel> CavalosDele = db.HorseModels.Where(m => TheirhorseID.Contains(m.Id)).ToList();
+
+            HorseModel temp;
+            List<HorseModel> Meuscavalos = new List<HorseModel>();
+            List<HorseModel> CavalosDele= new List<HorseModel>();
+            foreach (int id in MyhorseID)
+            {
+                 temp = db.HorseModels.Find(id);
+                Meuscavalos.Add(temp);
+              
+            }
+            foreach (int id in TheirhorseID)
+            {
+                temp = db.HorseModels.Find(id);
+                CavalosDele.Add(temp);
+
+            }
             int i = 0;
             MeusMatchesVIewModel matchmodel = new MeusMatchesVIewModel();
             MeusMatchesVIewIndex IndexMatch = new MeusMatchesVIewIndex();
-            while (i < MatchIds.Count())
+            if (MatchIds.Count > 0)
             {
-                matchmodel.MatchId = MatchIds[i];
-                matchmodel.MeusCavalos = Meuscavalos[i];
-                matchmodel.CavalosDeles = CavalosDele[i];
-                IndexMatch.MeusMatchesList.Add(matchmodel);
-                i++;
+                while (i < MatchIds.Count)
+                {
+                    matchmodel = new MeusMatchesVIewModel();
+                    matchmodel.MatchId = MatchIds[i];
+                    matchmodel.MeusCavalos = Meuscavalos[i];
+                    matchmodel.CavalosDeles = CavalosDele[i];
+                    IndexMatch.MeusMatchesList.Add(matchmodel);
+                    i++;
+                }
+                
             }
             return View(IndexMatch);
         }
         public ActionResult Deslike(int? id)
         {
+
             MatchModel match = new MatchModel();
             match = db.MatchModels.Where(m => m.Id == id).Single();
-            if(match.ApplicationUser1 == User.Identity.GetUserId())
-            {
-                match.Like2 = false;
-                match.Match = false;
-            }
-            else if(match.ApplicationUser2 == User.Identity.GetUserId())
+            MementoDeslike memento = new MementoDeslike(match);
+            if (match.ApplicationUser1 == User.Identity.GetUserId())
             {
                 match.Like1 = false;
+                match.Match = false;
+            }
+            else if (match.ApplicationUser2 == User.Identity.GetUserId())
+            {
+                match.Like2 = false;
                 match.Match = false;
             }
             if (ModelState.IsValid)
@@ -283,6 +309,8 @@ namespace Caalinder.Controllers
             }
             return RedirectToAction("MeusMatches");
         }
+
+    //    public ActionResult Relike()
         private void AddModelStateError(List<string> errors)
         {
             foreach (string error in errors)

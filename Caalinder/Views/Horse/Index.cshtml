@@ -1,19 +1,16 @@
 ﻿@model IEnumerable<Caalinder.Models.HorseModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Meus Cavalos";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Adicionar Cavalos", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            Dono
-        </th>
         <th>
             Cavalo
         </th>
@@ -36,9 +33,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUser.name)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>

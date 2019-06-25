@@ -14,10 +14,7 @@ namespace Caalinder.Models
     }
     public class MeusMatchesVIewIndex
     {
-        public MeusMatchesVIewIndex()
-        {
-            MeusMatchesList = new List<MeusMatchesVIewModel>();
-        }
-        public List<MeusMatchesVIewModel> MeusMatchesList { get; set; }
+        public List<MeusMatchesVIewModel> MeusMatchesList = new List<MeusMatchesVIewModel>();
+
     }
 }
