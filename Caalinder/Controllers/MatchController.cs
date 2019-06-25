@@ -261,10 +261,27 @@ namespace Caalinder.Controllers
             }
             return View(IndexMatch);
         }
-        public ActionResult Deslike()
+        public ActionResult Deslike(int? id)
         {
-
-            return View();
+            MatchModel match = new MatchModel();
+            match = db.MatchModels.Where(m => m.Id == id).Single();
+            if(match.ApplicationUser1 == User.Identity.GetUserId())
+            {
+                match.Like2 = false;
+                match.Match = false;
+            }
+            else if(match.ApplicationUser2 == User.Identity.GetUserId())
+            {
+                match.Like1 = false;
+                match.Match = false;
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(match).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MeusMatches");
+            }
+            return RedirectToAction("MeusMatches");
         }
         private void AddModelStateError(List<string> errors)
         {
