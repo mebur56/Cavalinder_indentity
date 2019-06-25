@@ -34,18 +34,39 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
+    <div class="page-wrapper-row full-height">
+        <div class="page-wrapper-middle">
+            <!-- BEGIN CONTAINER -->
+            <div class="page-container">
+                <!-- BEGIN CONTENT -->
+                <div class="page-content-wrapper">
+                    <div class="container body-content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper-row" style="position: absolute ;bottom: 0;width: 100%;">
+        <div class="page-wrapper-bottom">
+            <!-- BEGIN FOOTER -->
+            <div class="text-center">
+                <!-- BEGIN INNER FOOTER -->
+                <div class="page-footer fim">
+                    <div>
+                        <p>
+                            Cavalinder™
+                            <i class="icon-arrow-up"></i>
+                        </p>
+                    </div>
+                </div>
+                <!-- END INNER FOOTER -->
+            </div>
+            <!-- END FOOTER -->
+        </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <div class="footer fim">
-        <div class="end">
-            <p>
-                Cavalinder™
-            </p>
-        </div>
-    </div>
 </body>
 </html>

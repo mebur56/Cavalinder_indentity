@@ -474,7 +474,7 @@ namespace Caalinder.Controllers
                 user.Id = CurrentUser.Id;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Home");
+                return RedirectToAction("Index", "Home");
             }
             return View(editView);
         }

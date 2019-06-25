@@ -4,94 +4,124 @@
     ViewBag.Title = "MeusMatches";
 }
 
-<h2>Meus Matches</h2>
-<div class="col-lg-6 col-md-6">
-    <table class="table">
-        <tr>
-            <th>
-                Meu Cavalo
-            </th>
-            <th>
-                Raça
-            </th>
-            <th>
-                Data de Nascimento
-            </th>
-            <th>
-                Descrição
-            </th>
-            <th></th>
-        </tr>
+<h2>Casais</h2>
+<div class="col-lg-5 col-md-5">
+    <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+            <div class="table-scrollable">
+                <table class="table table-striped table-bordered table-hover table-header-fixed dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
+                    <thead>
+                        <tr role="row" class="odd" style="background-color: #333; color: #E9E9F1">
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Meu Cavalo
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column descending" style="width: 200px;">
+                                Raça
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Data de Nascimento
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Descrição
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var cavalo in Model.MeusMatchesList)
+                        {
+                            <tr role="row" class="odd">
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Name)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.HorseBrand)
+                                </td>
+                                <td class="text-center">
+                                    @cavalo.MeusCavalos.HorseBirth.ToString("dd/MM/yyyy")
+
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Description)
+                                </td>
 
 
-        @foreach (var cavalo in Model.MeusMatchesList)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.HorseBrand)
-                </td>
-                <td>
-                    @cavalo.MeusCavalos.HorseBirth.ToString("dd/MM/yyyy")
-            
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Description)
-                </td>
-
-
-            </tr>
-        }
-    </table>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="col-lg-6 col-md-6">
-    <table class="table">
-        <tr>
-            <th>
-                Dono
-            </th>
+<div class="col-lg-7 col-md-7">
+    <div class="portlet-body">
+        <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+            <div class="table-scrollable">
+                <table class="table table-striped table-bordered table-hover table-header-fixed dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
+                    <thead>
+                        <tr role="row" class="odd" style="background-color: #333; color: #E9E9F1">
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Dono
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column descending" style="width: 200px;">
+                                Nome do Cavalo
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Raça
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Data de Nascimento
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Descrição
+                            </th>
+                            <th class="text-center" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="activate to sort column ascending" style="width: 200px;">
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            <th>
-                Cavalo Matchado
-            </th>
-            <th>
-                Raça
-            </th>
-            <th>
-                Data de Nascimento
-            </th>
-            <th>
-                Descrição
-            </th>
-        </tr>
+                        @foreach (var cavalo in Model.MeusMatchesList)
+                        {
+                            <tr role="row" class="odd">
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.ApplicationUser.name)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Name)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBrand)
+                                </td>
+                                <td class="text-center">
+                                    @cavalo.CavalosDeles.HorseBirth.ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Description)
+                                </td>
+                                <td class="text-center">
+                                    @Html.ActionLink("Deslike", "Deslike", new { id = cavalo.MatchId })
+                                </td>
 
-        @foreach (var cavalo in Model.MeusMatchesList)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.ApplicationUser.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBrand)
-                </td>
-                <td>
-                    @cavalo.CavalosDeles.HorseBirth.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Description)
-                </td>
-                <td>
-                    @Html.ActionLink("Deslike", "Deslike", new { id = cavalo.MatchId })
-                </td>
-
-            </tr>
-        }
-    </table>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 

@@ -45,7 +45,7 @@ namespace Caalinder.Controllers
             }
             IEnumerable<HorseModel> horses = new List<HorseModel>();
             string userid = User.Identity.GetUserId();
-            horses = db.HorseModels.Where(h => h.ApplicationUserId == userid);
+            horses = db.HorseModels.Where(h => h.ApplicationUserId == userid && h.Gender != horseModel.Gender);
             ViewBag.Name = new SelectList(horses, "Id", "Name", horseModel.Name);
             HorseViewModel horseViewModel = AutoMapper.Mapper.Map<HorseModel, HorseViewModel>(horseModel);
             return View(horseViewModel);

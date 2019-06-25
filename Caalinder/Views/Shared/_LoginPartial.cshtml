@@ -5,13 +5,25 @@
     {
         @Html.AntiForgeryToken()
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <ul class="nav navbar-nav navbar-right">
-    <li>
-        @Html.ActionLink("Seja bem Vindo " + User.Identity.Name  + "!", "Index", "Horse", routeValues: null, htmlAttributes: new { title = "Manage" })
-    </li>
-    <li><a href="javascript:document.getElementById('logoutForm').submit()">Fazer logoff</a></li>
-    <li>@Html.ActionLink("Add Cavalo", "Create", "Horse")</li>
-    <li>@Html.ActionLink("Likar", "Index", "Match")</li>
+    @*<li>
+            @Html.ActionLink("Seja bem Vindo " + User.Identity.Name  + "!", "Index", "Horse", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>*@
+    @*<li>
+            @Html.ActionLink("Meus Cavalos", "Index", "Horse")
+        </li>*@
+    <li> <a class="fas fa-horse-head" href="@Url.Action("Index", "Horse")">    Meus Cavalos</a> </li>
+    <li> <a class="fa fa-heart" href="@Url.Action("MeusMatches", "Match")"> Casais</a> </li>
+    @*<li>@Html.ActionLink("Casais", "MeusMatches", "Match")</li>*@
+    @*<li>@Html.ActionLink("Encontrar Cavalos", "Index", "Match")</li>*@
+    <li> <a class="fa fa-search" href="@Url.Action("Index", "Match")"> Encontrar Cavalos</a> </li>
+    <li><a class="fas fa-door-open" href="javascript:document.getElementById('logoutForm').submit()">     Log-Out</a></li>
+    <li> <a class="material-icons" href="@Url.Action("Edit", "Account")"> <i class="material-icons">person</i></a> </li>
+
+
 </ul>
     }
 }
