@@ -56,6 +56,7 @@ namespace Caalinder.Controllers
                    .GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                horseModel.HorseBirth =Convert.ToDateTime( horseModel.HorseBirth.ToShortDateString());
                 horseModel.ApplicationUserId = CurrentUser.Id;
                 db.HorseModels.Add(horseModel);
                 db.SaveChanges();

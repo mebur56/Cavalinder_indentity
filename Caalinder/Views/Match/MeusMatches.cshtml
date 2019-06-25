@@ -34,7 +34,8 @@
                     @Html.DisplayFor(modelItem => cavalo.MeusCavalos.HorseBrand)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => cavalo.MeusCavalos.HorseBirth)
+                    @cavalo.MeusCavalos.HorseBirth.ToString("dd/MM/yyyy")
+            
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Description)
@@ -79,7 +80,7 @@
                     @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBrand)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBirth)
+                    @cavalo.CavalosDeles.HorseBirth.ToString("dd/MM/yyyy")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Description)
