@@ -17,7 +17,7 @@ namespace Caalinder.Controllers
     public class MatchController : Controller
     {
         static  MementoDeslike mementoLike = new MementoDeslike(null);
-        public bool memento;
+        static MementoDeslike mementoaux = new MementoDeslike(null);
         private ApplicationDbContext db = new ApplicationDbContext();
         public List<string> errors = new List<string>();
         // GET: Match
@@ -286,7 +286,7 @@ namespace Caalinder.Controllers
                 }
 
             }
-            if (mementoLike.getState() != null)
+            if (mementoLike.getState() != null && mementoaux.getState() != null)
             {
                 HorseModel horseModel = new HorseModel();
                 matchmodel = new MeusMatchesVIewModel();
@@ -305,14 +305,20 @@ namespace Caalinder.Controllers
                 }
                 matchmodel.MatchId = mementoLike.getState().Id;
                 IndexMatch.MeusMatchesList.Add(matchmodel);
+                mementoaux = new MementoDeslike(null);
+            }
+            else
+            {
+                var item = IndexMatch.MeusMatchesList.SingleOrDefault(x => x.Relike == true);
+                IndexMatch.MeusMatchesList.Remove(item);
             }
             return View(IndexMatch);
         }
         public ActionResult Deslike(int? id)
         {
             MatchModel match = new MatchModel();
-            match = db.MatchModels.Where(m => m.Id == id).Single();
-            mementoLike = new MementoDeslike(match);
+            match =  db.MatchModels.Where(m => m.Id == id).Single();
+            
             if (match.ApplicationUser1 == User.Identity.GetUserId())
             {
                 match.Like1 = false;
@@ -323,10 +329,14 @@ namespace Caalinder.Controllers
                 match.Like2 = false;
                 match.Match = false;
             }
+           
             if (ModelState.IsValid)
             {
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
+                match.Like1 = match.Like2 = match.Match = true;
+                mementoLike = new MementoDeslike(match);
+                mementoaux = new MementoDeslike(match);
                 return RedirectToAction("MeusMatches");
             }
             return RedirectToAction("MeusMatches");
@@ -334,16 +344,20 @@ namespace Caalinder.Controllers
 
         public ActionResult Relike(int? id)
         {
+            
             MatchModel match = mementoLike.getState();
+
             if (ModelState.IsValid)
             {
 
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
-                
+                mementoLike = new MementoDeslike(null);
+                mementoaux = new MementoDeslike(null);
                 return RedirectToAction("MeusMatches");
             }
             mementoLike = new MementoDeslike(null);
+            mementoaux = new MementoDeslike(null);
             return RedirectToAction("MeusMatches");
         }
         private void AddModelStateError(List<string> errors)
