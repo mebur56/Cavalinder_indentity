@@ -128,12 +128,27 @@ namespace Caalinder.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            MatchViewDetails matchViewDetails = new MatchViewDetails();
             MatchModel matchModel = db.MatchModels.Find(id);
+            if (User.Identity.GetUserId() == matchModel.ApplicationUser1)
+            {
+                matchViewDetails.Email = db.Users.Find(matchModel.ApplicationUser2).Email;
+                matchViewDetails.Cidade = db.Users.Find(matchModel.ApplicationUser2).Cidade;
+                matchViewDetails.Estado = db.Users.Find(matchModel.ApplicationUser2).Estado;
+                matchViewDetails.Cavalo = db.HorseModels.Find(matchModel.Horse2Id);
+            }
+            else
+            {
+                matchViewDetails.Email = db.Users.Find(matchModel.ApplicationUser1).Email;
+                matchViewDetails.Cidade = db.Users.Find(matchModel.ApplicationUser1).Cidade;
+                matchViewDetails.Estado = db.Users.Find(matchModel.ApplicationUser1).Estado;
+                matchViewDetails.Cavalo = db.HorseModels.Find(matchModel.Horse1Id);
+            }
             if (matchModel == null)
             {
                 return HttpNotFound();
             }
-            return View(matchModel);
+            return View(matchViewDetails);
         }
 
         public ActionResult Create()

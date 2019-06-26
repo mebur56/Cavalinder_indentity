@@ -318,12 +318,12 @@
     <Content Include="Views\Horse\Index.cshtml" />
     <Content Include="Views\Match\Create.cshtml" />
     <Content Include="Views\Match\Delete.cshtml" />
-    <Content Include="Views\Match\Details.cshtml" />
     <Content Include="Views\Match\Edit.cshtml" />
     <Content Include="Views\Match\Index.cshtml" />
     <Content Include="Views\Match\SelecionarCavalo.cshtml" />
     <Content Include="Views\Match\MeusMatches.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Match\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

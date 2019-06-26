@@ -1,4 +1,4 @@
-﻿@model Caalinder.Models.MatchModel
+﻿@model Caalinder.Models.MatchViewDetails
 
 @{
     ViewBag.Title = "Details";
@@ -7,52 +7,41 @@
 <h2>Details</h2>
 
 <div>
-    <h4>MatchModel</h4>
+    <h4>MatchViewDetails</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Horse1Id)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Horse1Id)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Horse2Id)
+            @Html.DisplayNameFor(model => model.Cidade)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Horse2Id)
+            @Html.DisplayFor(model => model.Cidade)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Like1)
+            @Html.DisplayNameFor(model => model.Estado)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Like1)
+            @Html.DisplayFor(model => model.Estado)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Like2)
+            @Html.DisplayNameFor(model => model.Cavalo.Name)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Like2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Match)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Match)
+            @Html.DisplayFor(model => model.Cavalo.Name)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "MeusMatches")
 </p>

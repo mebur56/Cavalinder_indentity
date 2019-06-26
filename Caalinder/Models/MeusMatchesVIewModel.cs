@@ -18,4 +18,12 @@ namespace Caalinder.Models
         public List<MeusMatchesVIewModel> MeusMatchesList = new List<MeusMatchesVIewModel>();
 
     }
+
+    public class MatchViewDetails
+    {
+        public HorseModel Cavalo { get; set; }
+        public string Email { get; set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
+    }
 }
