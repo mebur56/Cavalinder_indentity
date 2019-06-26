@@ -91,13 +91,28 @@ namespace Caalinder.Controllers
                 AddModelStateError(errors);
                 return RedirectToAction("SelecionarCavalo/" + Otherhorse.Id);
             }
-
-
         }
         public void updateMatch(MatchModel match)
         {
             db.Entry(match).State = EntityState.Modified;
             db.SaveChanges();
+            int likes = 0;
+            List<MatchModel> matchlist = db.MatchModels.Where(p => p.Horse1Id == match.Horse1Id).ToList();
+            List<MatchModel> matchlist2 = db.MatchModels.Where(p => p.Horse2Id == match.Horse1Id).ToList();
+            foreach (MatchModel matches in matchlist)
+            {
+                if (matches.Like2)
+                {
+                    likes++;
+                }
+            }
+            foreach (MatchModel matches in matchlist2)
+            {
+                if (matches.Like1)
+                {
+                    likes++;
+                }
+            }
         }
 
         public void AddNewMatch(bool like1, bool like2, string CurrentUserID,string usercavaloescolhidoID, int horseId1, int horseId2)
@@ -105,6 +120,7 @@ namespace Caalinder.Controllers
             MatchModel Match = new MatchModel();
             Match.Like1 = like1;
             Match.Like2 = like2;
+            int likes = 0;
             Match.ApplicationUser1 = CurrentUserID;
             Match.ApplicationUser2 = usercavaloescolhidoID;
             Match.Horse1Id = horseId1;
@@ -116,6 +132,22 @@ namespace Caalinder.Controllers
             {
                 db.MatchModels.Add(Match);
                 db.SaveChanges();
+                List<MatchModel> matchlist = db.MatchModels.Where(p => p.Horse1Id == horseId2).ToList();
+                List<MatchModel> matchlist2 = db.MatchModels.Where(p => p.Horse2Id == horseId2).ToList();
+                foreach (MatchModel match in matchlist)
+                {
+                    if (match.Like2)
+                    {
+                        likes++;
+                    }
+                }
+                foreach (MatchModel match in matchlist2)
+                {
+                    if (match.Like1)
+                    {
+                        likes++;
+                    }
+                }
             }
             else
             {

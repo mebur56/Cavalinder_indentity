@@ -24,9 +24,9 @@ namespace Caalinder.Observer
         }
 
         public void OnNext(Email value)
-        {
-
-        }
+        { 
+            
+      }
         public void Dispose()
         {
             _disposer.Dispose();

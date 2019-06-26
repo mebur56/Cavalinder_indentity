@@ -37,7 +37,7 @@ namespace Caalinder.Data
                     Id = 0,
                     Match = false,
                     Like1 = false,
-                    Like2 = false
+                    Like2 = false         
                 };
             }
         }
