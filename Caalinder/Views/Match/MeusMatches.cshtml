@@ -95,36 +95,38 @@
 
                         @foreach (var cavalo in Model.MeusMatchesList)
                         {
-                        <tr role="row" class="odd">
-                            <td class="text-center">
-                                @Html.DisplayFor(modelItem => cavalo.CavalosDeles.ApplicationUser.name)
-                            </td>
-                            <td class="text-center">
-                                @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Name)
-                            </td>
-                            <td class="text-center">
-                                @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBrand)
-                            </td>
-                            <td class="text-center">
-                                @cavalo.CavalosDeles.HorseBirth.ToString("dd/MM/yyyy")
-                            </td>
-                            <td class="text-center">
-                                @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Description)
-                            </td>
-                            @if (cavalo.Relike == false)
-                            {
+                            <tr role="row" class="odd">
                                 <td class="text-center">
-                                    @Html.ActionLink("Deslike", "Deslike", new { id = cavalo.MatchId })
+                                    <a href="@Url.Action("Details","Match", new {id = cavalo.MatchId})" style="color: black">
+                                        @Html.DisplayFor(modelItem => cavalo.CavalosDeles.ApplicationUser.name)
+                                    </a>
                                 </td>
-                            }
-                            else
-                            {
                                 <td class="text-center">
-                                    @Html.ActionLink("Relike", "Relike", new { id = cavalo.MatchId })
+                                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Name)
                                 </td>
-                            }
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.HorseBrand)
+                                </td>
+                                <td class="text-center">
+                                    @cavalo.CavalosDeles.HorseBirth.ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => cavalo.CavalosDeles.Description)
+                                </td>
+                                @if (cavalo.Relike == false)
+                                {
+                                    <td class="text-center">
+                                        @Html.ActionLink("Deslike", "Deslike", new { id = cavalo.MatchId })
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="text-center">
+                                        @Html.ActionLink("Relike", "Relike", new { id = cavalo.MatchId })
+                                    </td>
+                                }
 
-                        </tr>
+                            </tr>
                         }
                     </tbody>
                 </table>
