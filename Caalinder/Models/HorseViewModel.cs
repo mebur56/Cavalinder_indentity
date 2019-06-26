@@ -15,7 +15,7 @@ namespace Caalinder.Models
         public string Name { get; set; }
         [Required]
         [Display(Name = "Sexo")]
-        public string Gender { get; set; }
+        public GenderEnum Gender { get; set; }
         [Required]
         [Display(Name = "Raça")]
         public string HorseBrand { get; set; }
@@ -31,6 +31,12 @@ namespace Caalinder.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public string ApplicationUserId { get; set; }
+
+    }
+    public enum GenderEnum
+    {
+        Macho,
+        Fêmea
     }
 
     public class HorseViewIndex

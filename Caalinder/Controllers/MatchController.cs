@@ -13,11 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Caalinder.Controllers
 {
-    
+
     public class MatchController : Controller
     {
         MementoDeslike mementoLike = new MementoDeslike(null);
-        public bool memento = false;
+        public bool memento;
         private ApplicationDbContext db = new ApplicationDbContext();
         public List<string> errors = new List<string>();
         // GET: Match
@@ -227,7 +227,7 @@ namespace Caalinder.Controllers
             //isso ja ta funcionando passando uma modelview para a view onde tem duas listas uma com os cavalos do usuario e o cavalo
             //com o qual ele deu match sendo respectivos o meu cavalo 1 deu match com o cavalo 1 da outra lista e assim vai
             // não sei mexer em html para aparecer numa tabela bonita mas essa parte ta pronta
-            
+
             string userID = User.Identity.GetUserId();
             IEnumerable<MatchModel> Matches = db.MatchModels.Where(m => m.ApplicationUser1 == userID
             || m.ApplicationUser2 == userID);
@@ -238,7 +238,7 @@ namespace Caalinder.Controllers
             {
 
                 if (mates.Like1 && mates.Like2 && mates.Match)
-                {
+                {                   
                     MatchIds.Add(mates.Id);
                     if (mates.ApplicationUser1 == userID)
                     {
@@ -256,12 +256,12 @@ namespace Caalinder.Controllers
 
             HorseModel temp;
             List<HorseModel> Meuscavalos = new List<HorseModel>();
-            List<HorseModel> CavalosDele= new List<HorseModel>();
+            List<HorseModel> CavalosDele = new List<HorseModel>();
             foreach (int id in MyhorseID)
             {
-                 temp = db.HorseModels.Find(id);
+                temp = db.HorseModels.Find(id);
                 Meuscavalos.Add(temp);
-              
+
             }
             foreach (int id in TheirhorseID)
             {
@@ -275,15 +275,36 @@ namespace Caalinder.Controllers
             if (MatchIds.Count > 0)
             {
                 while (i < MatchIds.Count)
-                {
+                {    
                     matchmodel = new MeusMatchesVIewModel();
+                    matchmodel.Relike = false;
                     matchmodel.MatchId = MatchIds[i];
                     matchmodel.MeusCavalos = Meuscavalos[i];
                     matchmodel.CavalosDeles = CavalosDele[i];
                     IndexMatch.MeusMatchesList.Add(matchmodel);
                     i++;
                 }
-                
+
+            }
+            if (memento == true)
+            {
+                HorseModel horseModel = new HorseModel();
+                matchmodel = new MeusMatchesVIewModel();
+                matchmodel.Relike = true;
+                int id1 = mementoLike.getState().Horse1Id;
+                int id2 = mementoLike.getState().Horse2Id;
+                if (mementoLike.getState().ApplicationUser1 == User.Identity.GetUserId())
+                {
+                    matchmodel.MeusCavalos = db.HorseModels.Where(m => m.Id == id1).Single();
+                    matchmodel.CavalosDeles = db.HorseModels.Where(m => m.Id == id2).Single();
+                }
+                else
+                {
+                    matchmodel.MeusCavalos = db.HorseModels.Where(m => m.Id == id2).Single();
+                    matchmodel.CavalosDeles = db.HorseModels.Where(m => m.Id == id1).Single();
+                }
+                matchmodel.MatchId = mementoLike.getState().Id;
+                IndexMatch.MeusMatchesList.Add(matchmodel);
             }
             return View(IndexMatch);
         }
@@ -315,13 +336,14 @@ namespace Caalinder.Controllers
         public ActionResult Relike(int? id)
         {
             MatchModel match = mementoLike.getState();
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
+                memento = false;
                 return RedirectToAction("MeusMatches");
             }
-            return View();
+            return RedirectToAction("MeusMatches");
         }
         private void AddModelStateError(List<string> errors)
         {

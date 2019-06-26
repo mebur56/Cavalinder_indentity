@@ -10,6 +10,7 @@ namespace Caalinder.Models
         public int MatchId { get; set; }
         public HorseModel MeusCavalos { get; set; }
         public HorseModel CavalosDeles { get; set; }
+        public bool Relike;
 
     }
     public class MeusMatchesVIewIndex
