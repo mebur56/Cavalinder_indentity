@@ -17,7 +17,6 @@ namespace Caalinder.Controllers
     public class MatchController : Controller
     {
         static  MementoDeslike mementoLike = new MementoDeslike(null);
-        static MementoDeslike mementoaux = new MementoDeslike(null);
         private ApplicationDbContext db = new ApplicationDbContext();
         public List<string> errors = new List<string>();
         // GET: Match
@@ -63,6 +62,7 @@ namespace Caalinder.Controllers
             bool likou = false;
             int IdMeuCavaloEscolhido = Convert.ToInt32(form["Name"].ToString());
             int IdCavaloEscolhido = Convert.ToInt32(form["IdCavalo"].ToString());
+            HorseModel horsecavaloescolhido = db.HorseModels.SingleOrDefault(p => p.Id == IdCavaloEscolhido);
             matchlist = db.MatchModels.Where(m => m.Horse1Id == IdCavaloEscolhido);
             foreach (MatchModel model in matchlist)
             {
@@ -71,6 +71,7 @@ namespace Caalinder.Controllers
                     model.Like1 = true;
                     model.Like2 = true;
                     model.Match = true;
+                    model.ApplicationUser1 = horsecavaloescolhido.ApplicationUserId;
                     model.ApplicationUser2 = User.Identity.GetUserId();
                     matchfeito = model;
                     likou = true;
@@ -81,7 +82,7 @@ namespace Caalinder.Controllers
             if (Myhorse.Gender != Otherhorse.Gender)
             {
                 if (likou) updateMatch(matchfeito);
-                else AddNewMatch(true, false, User.Identity.GetUserId(), IdMeuCavaloEscolhido, IdCavaloEscolhido);
+                else AddNewMatch(true, false, User.Identity.GetUserId(),horsecavaloescolhido.ApplicationUserId , IdMeuCavaloEscolhido, IdCavaloEscolhido);
                 return RedirectToAction("Index");
             }
             else
@@ -99,12 +100,13 @@ namespace Caalinder.Controllers
             db.SaveChanges();
         }
 
-        public void AddNewMatch(bool like1, bool like2, string CurrentUserID, int horseId1, int horseId2)
+        public void AddNewMatch(bool like1, bool like2, string CurrentUserID,string usercavaloescolhidoID, int horseId1, int horseId2)
         {
             MatchModel Match = new MatchModel();
             Match.Like1 = like1;
             Match.Like2 = like2;
             Match.ApplicationUser1 = CurrentUserID;
+            Match.ApplicationUser2 = usercavaloescolhidoID;
             Match.Horse1Id = horseId1;
             Match.Horse2Id = horseId2;
             IEnumerable<MatchModel> matchexist = db.MatchModels.Where(m => (m.Like1 == Match.Like1 &&
@@ -301,13 +303,14 @@ namespace Caalinder.Controllers
                 }
 
             }
-            if (mementoLike.getState() != null && mementoaux.getState() != null)
+            if (mementoLike.getState().Id != 0)
             {
                 HorseModel horseModel = new HorseModel();
                 matchmodel = new MeusMatchesVIewModel();
                 matchmodel.Relike = true;
                 int id1 = mementoLike.getState().Horse1Id;
                 int id2 = mementoLike.getState().Horse2Id;
+             
                 if (mementoLike.getState().ApplicationUser1 == User.Identity.GetUserId())
                 {
                     matchmodel.MeusCavalos = db.HorseModels.Where(m => m.Id == id1).Single();
@@ -319,8 +322,10 @@ namespace Caalinder.Controllers
                     matchmodel.CavalosDeles = db.HorseModels.Where(m => m.Id == id1).Single();
                 }
                 matchmodel.MatchId = mementoLike.getState().Id;
+                var item = IndexMatch.MeusMatchesList.SingleOrDefault(x => x.Relike == true);
+                IndexMatch.MeusMatchesList.Remove(item);
                 IndexMatch.MeusMatchesList.Add(matchmodel);
-                mementoaux = new MementoDeslike(null);
+               
             }
             else
             {
@@ -333,7 +338,8 @@ namespace Caalinder.Controllers
         {
             MatchModel match = new MatchModel();
             match =  db.MatchModels.Where(m => m.Id == id).Single();
-            
+            mementoLike = new MementoDeslike(match);
+
             if (match.ApplicationUser1 == User.Identity.GetUserId())
             {
                 match.Like1 = false;
@@ -349,9 +355,7 @@ namespace Caalinder.Controllers
             {
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
-                match.Like1 = match.Like2 = match.Match = true;
-                mementoLike = new MementoDeslike(match);
-                mementoaux = new MementoDeslike(match);
+
                 return RedirectToAction("MeusMatches");
             }
             return RedirectToAction("MeusMatches");
@@ -368,11 +372,11 @@ namespace Caalinder.Controllers
                 db.Entry(match).State = EntityState.Modified;
                 db.SaveChanges();
                 mementoLike = new MementoDeslike(null);
-                mementoaux = new MementoDeslike(null);
+ 
                 return RedirectToAction("MeusMatches");
             }
             mementoLike = new MementoDeslike(null);
-            mementoaux = new MementoDeslike(null);
+
             return RedirectToAction("MeusMatches");
         }
         private void AddModelStateError(List<string> errors)
