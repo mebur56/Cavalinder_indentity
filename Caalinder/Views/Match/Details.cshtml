@@ -1,47 +1,66 @@
 ﻿@model Caalinder.Models.MatchViewDetails
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes";
 }
+<div class="container">
+    <div class="row">
+        <div class="span12" style="text-align:center; margin: 0 auto;padding-right:19px;">
+            <div class="form-group" style="width: 400px; margin: 0 auto; padding-top: 15px;">
+                <h2>Detalhes</h2>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Details</h2>
 
 <div>
-    <h4>MatchViewDetails</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+        <div class="container">
+            <div class="row">
+                <div class="span12" style="text-align:left; margin: 0 auto;padding-right:70px;">
+                    <div class="form-group" style="width: 400px; margin: 0 auto;">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cidade)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Cidade)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Estado)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Cavalo.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Cavalo.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Estado)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cavalo.Name)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Cavalo.Name)
+                        </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Voltar", "MeusMatches")
-</p>
+<div class="container">
+    <div class="row">
+        <div class="span12" style="text-align:left; margin: 0 auto;padding-right:54px;">
+            <div class="form-group" style="width: 400px; margin: 0 auto;">
+                <button class="btn" style="text-align:center;">
+                    @Html.ActionLink("Voltar", "MeusMatches")
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

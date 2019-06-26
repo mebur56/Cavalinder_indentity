@@ -21,7 +21,7 @@
     @*<li>@Html.ActionLink("Encontrar Cavalos", "Index", "Match")</li>*@
     <li> <a class="fa fa-search" href="@Url.Action("Index", "Match")"> Encontrar Cavalos</a> </li>
     <li><a class="fas fa-door-open" href="javascript:document.getElementById('logoutForm').submit()">     Log-Out</a></li>
-    <li> <a class="material-icons" href="@Url.Action("Edit", "Account")"> <i class="material-icons">person</i></a> </li>
+    <li> <a class="material-icons" href="@Url.Action("Edit", "Account")"><i class="material-icons">person </i></a></li>
 
 
 </ul>
@@ -31,6 +31,6 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Registre-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Logon", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

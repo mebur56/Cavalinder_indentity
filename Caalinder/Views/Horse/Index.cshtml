@@ -11,7 +11,7 @@
     </p>*@
 <h3></h3>
 <div class="portlet light">
-    <div class="icon btn-plus-g">
+    <div class="icon btn-plus-g" style="margin:5px;">
         <a class="topbar-link btn btn-circle green" href="@Url.Action("Create", "Horse")" title="Cavalo">
             <i class="fas fa-horse-head"> +Cavalo </i>
         </a>
@@ -68,11 +68,11 @@
                             <td class="text-center" style="padding-top:30px;">
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
-                            <td class="text-center">
-                                <a class="topbar-link btn btn-circle dark btn-outline" href="@Url.Action("Edit", "Horse", new {id=item.Id })" title="Editar">
+                            <td class="text-center" style="width:70px;">
+                                <a class="topbar-link btn btn-circle dark btn-outline" style="margin:5px;" href="@Url.Action("Edit", "Horse", new {id=item.Id })" title="Editar">
                                     <i class="fa fa-edit" style="width:60px"> Editar </i>
                                 </a>
-                                <a class="topbar-link btn btn-circle red btn-outline " href="@Url.Action("Delete", "Horse", new {id=item.Id })" title="Deletar">
+                                <a class="topbar-link btn btn-circle red btn-outline" href="@Url.Action("Delete", "Horse", new {id=item.Id })" title="Deletar">
                                     <i class="fa fa-trash" style="width:60px"> Deletar </i>
                                 </a>
                                 @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@

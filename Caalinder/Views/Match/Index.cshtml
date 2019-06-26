@@ -66,7 +66,7 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                <a class="glyphicon glyphicon-thumbs-up" style="padding-top:7px"> @Html.ActionLink("Like", "SelecionarCavalo", new { id = item.Id })</a>
+                                <button class="btn" style="padding-top:7px; text-align:center;"> @Html.ActionLink("Like", "SelecionarCavalo", new { id = item.Id })</button>
                             </td>
                         </tr>
                         }

@@ -1474,13 +1474,13 @@ textarea {
 }
 
 a {
-    color: red;
+    color: white;
     text-decoration: none;
 }
 
     a:hover,
     a:focus {
-        color: #23527c;
+        color: red;
         text-decoration: underline;
     }
 
@@ -3816,7 +3816,7 @@ select[multiple].input-lg {
     font-size: 14px;
     font-weight: normal;
     line-height: 1.42857143;
-    text-align: center;
+    text-align: left;
     white-space: nowrap;
     vertical-align: middle;
     -ms-touch-action: manipulation;
@@ -3826,9 +3826,13 @@ select[multiple].input-lg {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    background-color:black;
     background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
+    border: 2px solid red;
+    border-radius: 7px;
+    text-transform:uppercase;
+    color:white;
+    width: 120px;
 }
 
     .btn:focus,
@@ -3876,12 +3880,13 @@ fieldset[disabled] a.btn {
     background-color: black;
     border-color: red;
     text-transform:uppercase;
+    border-radius:4px;
 }
 
     .btn-default:focus,
     .btn-default.focus {
         color: #333;
-        background-color: #e6e6e6;
+        background-color: black;
         border-color: #8c8c8c;
     }
 
@@ -4287,7 +4292,7 @@ fieldset[disabled] a.btn {
 
             .btn-link:hover,
             .btn-link:focus {
-                color: #23527c;
+                color: white;
                 text-decoration: underline;
                 background-color: transparent;
             }
