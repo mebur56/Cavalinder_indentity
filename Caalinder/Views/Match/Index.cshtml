@@ -47,26 +47,26 @@
                         @foreach (var item in Model)
                         {
                         <tr role="row" class="odd">
-                            <td class="text-center">
+                            <td class="text-center" style="padding-top:16px;">
                                 @Html.DisplayFor(modelItem => item.ApplicationUser.name)
                             </td>
-                            <td class="text-center"style="padding-top:18px;">
+                            <td class="text-center"style="padding-top:16px;">
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
-                            <td class="text-center" style="padding-top:18px;">
+                            <td class="text-center" style="padding-top:16px;">
                                 @Html.DisplayFor(modelItem => item.Gender)
                             </td>
-                            <td class="text-center" style="padding-top:18px;">
+                            <td class="text-center" style="padding-top:16px;">
                                 @Html.DisplayFor(modelItem => item.HorseBrand)
                             </td>
-                            <td class="text-center" style="padding-top:18px;">
+                            <td class="text-center" style="padding-top:16px;">
                                 @item.HorseBirth.ToString("dd/MM/yyyy")
                             </td>
-                            <td class="text-center" style="padding-top:18px;">
+                            <td class="text-center" style="padding-top:16px;">
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                <a class="glyphicon glyphicon-thumbs-up" style="padding-top:13px"> @Html.ActionLink("Like", "SelecionarCavalo", new { id = item.Id })</a>
+                                <a class="glyphicon glyphicon-thumbs-up" style="padding-top:7px"> @Html.ActionLink("Like", "SelecionarCavalo", new { id = item.Id })</a>
                             </td>
                         </tr>
                         }
