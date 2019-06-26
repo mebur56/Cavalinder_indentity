@@ -8,17 +8,17 @@
     <div class="row">
         <div class="span12" style="text-align:center; margin: 0 auto;">
             <div class="col-md-12">
-                <h2 style="padding-right:15px;">@ViewBag.Title</h2>
+                <h2 style="padding-right:27px;">@ViewBag.Title</h2>
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <img src="~/Imagens/LogoCima.png" style="padding-left:47px;"/>
-                    <h4 style="padding-right:7px;">Usar uma conta local para efetuar login</h4>
+                    <img src="~/Imagens/LogoCima.png" style="padding-right:25px;"/>
+                    <h4 style="padding-right:25px;">Usar uma conta local para efetuar login</h4>
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="container">
                         <div class="row">
-                            <div class="span12" style="text-align:center; margin: 0 auto;padding-right: 80px;">
+                            <div class="span12" style="text-align:center; margin: 0 auto;padding-right: 105px;">
                                 <div class="form-group" style="width: 400px; margin: 0 auto;">
                                     @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                                     <div class="col-md-10">
@@ -32,7 +32,7 @@
 
                     <div class="container">
                         <div class="row">
-                            <div class="span12" style="text-align:center; margin: 0 auto; padding-right:80px;">
+                            <div class="span12" style="text-align:center; margin: 0 auto; padding-right:105px;">
                                 <div class="form-group" style="width: 400px; margin: 0 auto;padding-top: 15px;">
                                     @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
                                     <div class="col-md-10">
@@ -47,7 +47,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="span12" style="text-align:center; margin: 0 auto;">
-                                <div class="form-group" style="width: 400px; margin: 0 auto; padding-top: 15px; padding-right:205px;">
+                                <div class="form-group" style="width: 400px; margin: 0 auto; padding-top: 15px; padding-right:225px;">
                                     <div class="col-md-offset-2 col-md-10">
                                         <div class="checkbox">
                                             @Html.CheckBoxFor(m => m.RememberMe)
@@ -62,13 +62,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="span12" style="text-align:center; margin: 0 auto;">
-                                <div class="form-group" style="width: 400px; margin: 0 auto; padding-right: 85px; padding-top:15px;">
+                                <div class="form-group" style="width: 400px; margin: 0 auto; padding-right: 105px; padding-top:15px;">
                                     <div class="col-md-offset-2 col-md-10">
                                         <input type="submit" value="Efetuar login" class="btn btn-default" />
                                     </div>
                                 </div>
 
-                                <p style="padding-right:40px; padding-top:20px;">
+                                <p style="padding-right:60px; padding-top:20px;">
                                     @Html.ActionLink("Registrar-se como novo usuário", "Register")
                                 </p>
                             </div>
