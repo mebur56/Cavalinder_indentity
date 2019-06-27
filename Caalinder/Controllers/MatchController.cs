@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Caalinder.Data;
 using Caalinder.Models;
+using Caalinder.Observer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -57,9 +58,11 @@ namespace Caalinder.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Confirmar(FormCollection form)
         {
+            
             IEnumerable<MatchModel> matchlist = new List<MatchModel>();
             MatchModel matchfeito = new MatchModel();
             bool likou = false;
+
             int IdMeuCavaloEscolhido = Convert.ToInt32(form["Name"].ToString());
             int IdCavaloEscolhido = Convert.ToInt32(form["IdCavalo"].ToString());
             HorseModel horsecavaloescolhido = db.HorseModels.SingleOrDefault(p => p.Id == IdCavaloEscolhido);
@@ -97,6 +100,7 @@ namespace Caalinder.Controllers
             db.Entry(match).State = EntityState.Modified;
             db.SaveChanges();
             int likes = 0;
+            ObserverModel observer = new ObserverModel("email");    
             List<MatchModel> matchlist = db.MatchModels.Where(p => p.Horse1Id == match.Horse1Id).ToList();
             List<MatchModel> matchlist2 = db.MatchModels.Where(p => p.Horse2Id == match.Horse1Id).ToList();
             foreach (MatchModel matches in matchlist)
@@ -113,6 +117,7 @@ namespace Caalinder.Controllers
                     likes++;
                 }
             }
+            observer.Update(likes);
         }
 
         public void AddNewMatch(bool like1, bool like2, string CurrentUserID,string usercavaloescolhidoID, int horseId1, int horseId2)
@@ -130,6 +135,7 @@ namespace Caalinder.Controllers
 
             if (!matchexist.Any())
             {
+                ObserverModel observer = new ObserverModel("email");
                 db.MatchModels.Add(Match);
                 db.SaveChanges();
                 List<MatchModel> matchlist = db.MatchModels.Where(p => p.Horse1Id == horseId2).ToList();
@@ -148,6 +154,7 @@ namespace Caalinder.Controllers
                         likes++;
                     }
                 }
+                observer.Update(likes);
             }
             else
             {

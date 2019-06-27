@@ -5,31 +5,21 @@ using System.Web;
 
 namespace Caalinder.Observer
 {
-    public class ObserverModel : IObserver<Email>
+    public class ObserverModel
     {
-        private IDisposable _disposer;
-        public ObserverModel(IObservable<Email> controladorEmail)
+        public string _email;
+        public ObserverModel(string email)
         {
-            _disposer = controladorEmail.Subscribe(this);
+            this._email = email;
         }
 
-        public void OnCompleted()
+        public void Update(int like)
         {
-            throw new NotImplementedException();
+            if(like%5==0)
+            {
+                //send email
+            }
         }
-
-        public void OnError(Exception error)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnNext(Email value)
-        { 
-            
-      }
-        public void Dispose()
-        {
-            _disposer.Dispose();
-        }
+       
     }
 }
