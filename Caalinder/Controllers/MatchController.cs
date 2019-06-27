@@ -100,7 +100,7 @@ namespace Caalinder.Controllers
             db.Entry(match).State = EntityState.Modified;
             db.SaveChanges();
             int likes = 0;
-            ObserverModel observer = new ObserverModel("email");    
+            ObserverModel observer = new ObserverModel("");    
             List<MatchModel> matchlist = db.MatchModels.Where(p => p.Horse1Id == match.Horse1Id).ToList();
             List<MatchModel> matchlist2 = db.MatchModels.Where(p => p.Horse2Id == match.Horse1Id).ToList();
             foreach (MatchModel matches in matchlist)
@@ -155,6 +155,7 @@ namespace Caalinder.Controllers
                     }
                 }
                 observer.Update(likes);
+                observer._email = db.Users.Find(usercavaloescolhidoID).Email;
             }
             else
             {

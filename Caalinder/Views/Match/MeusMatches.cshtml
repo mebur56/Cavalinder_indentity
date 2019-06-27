@@ -34,6 +34,8 @@
 
                         @foreach (var cavalo in Model.MeusMatchesList)
                         {
+                            if (cavalo.MeusCavalos != null)
+                            {
                             <tr role="row" class="odd">
                                 <td class="text-center">
                                     @Html.DisplayFor(modelItem => cavalo.MeusCavalos.Name)
@@ -42,7 +44,7 @@
                                     @Html.DisplayFor(modelItem => cavalo.MeusCavalos.HorseBrand)
                                 </td>
                                 <td class="text-center">
-                                    @cavalo.MeusCavalos.HorseBirth.ToString("dd/MM/yyyy")
+                                    @cavalo.MeusCavalos.HorseBirth
 
                                 </td>
                                 <td class="text-center">
@@ -51,7 +53,8 @@
 
 
                             </tr>
-                        }
+                                }
+                            }
                     </tbody>
                 </table>
             </div>
