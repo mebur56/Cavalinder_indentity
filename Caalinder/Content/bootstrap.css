@@ -89,7 +89,8 @@ html, body {
     width: 800px;
 }
 .footer {
-    position: absolute;
+    margin: 0 auto;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
