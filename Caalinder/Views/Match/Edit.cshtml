@@ -1,18 +1,25 @@
 ﻿@model Caalinder.Models.MatchModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
+<div class="container">
+    <div class="row">
+        <div class="span12" style="text-align:center; margin: 0 auto;">
+            <div class="form-group" style="width: 400px; margin: 0 auto; padding-right: 105px; padding-top:15px;">
+                <h2>Editar</h2>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>MatchModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
